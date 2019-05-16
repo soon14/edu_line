@@ -1,7 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 *{
-    font-family: "微软雅黑";
+	font-family: "微软雅黑";
 }
 .banner,.bannerwrap,.center-type,.centerbox,.communitybox,.content,.footer,.fullSlide,.header,.itembox,.itembox2,.jgitembox,.livepalce,.login-footer,.teacherpalce,.topbox,.toppic{float:left;width:100%;min-width:1200px;background-color: #f0f0f2;}
 .wrap{margin:20px auto 20px;width:1200px;zoom:1;}
@@ -461,7 +461,7 @@ header{width:100%;height:206px;background: #fff;}
 .look_scanning .ewm p{color:#666;font-size:14px;line-height:18px}
 .nav1 ul li{float:left}
 .look_scanning .ewm>div{
-    min-width: 93px;
+	min-width: 93px;
 }
 .nav1 ul li i{margin-top:39px!important}
 .nav1 ul li a{display:inline-block;color:#fff;text-decoration:none;font-size:16px;font-family:'Microsoft YaHei';line-height:80px}
@@ -500,4 +500,5 @@ header{width:100%;height:206px;background: #fff;}
 
 /* 白色导航-入驻机构  */
 .nav2 a{border-color: #00BED4;color: #00BED4}
+
 

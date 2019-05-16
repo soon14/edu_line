@@ -1,7 +1,7 @@
 @charset "utf-8";
 /***************************/
 *{
-    font-family: "微软雅黑";
+	font-family: "微软雅黑";
 }
 /*小组*/
 .group-show-item{float:right;width:430px;margin-top:25px;margin-right:-33px}
@@ -33,13 +33,13 @@ a.option_btn:hover{color:#fc6238}
 .teacherlist .sc.on i{background-position:-115px -265px}
 .teacherlist .teacher-info .more{position:absolute;bottom:10px;right:10px;width:132px;line-height:36px;font-size:16px;float:right;color:#fff;background-color:#00BED4;text-align:center;border-radius:3px;display:none}
 .teacherlist li{
-    float: left;
-    overflow: hidden;
-    border-radius: 4px;
-    margin: 0 25px 30px 0;
-    width: 275px;
-    height: 300px;
-    background-color: white;
+	float: left;
+	overflow: hidden;
+	border-radius: 4px;
+	margin: 0 25px 30px 0;
+	width: 275px;
+	height: 300px;
+	background-color: white;
 }
 /*讲师view视图页*/
 .teacher-comment .tab-nav-info .top-nav a.item:hover{color: #3d3d3d;font-weight: 700;}
@@ -53,15 +53,15 @@ a.option_btn:hover{color:#fc6238}
 .teacher_right .teacher_side ul li .info .name span{border:1px solid rgba(43,114,189,.74);color:rgba(43,114,189,.82);margin-left:5px;border-radius:4px}
 .teacher_right .teacher_side ul li .info .price{float:right}
 ul li .name{
-    display:block;
-    font-size: 18px;
-    color: #333;
-    text-align: center;
-    margin-top: 16px;
+	display:block;
+	font-size: 18px;
+	color: #333;
+	text-align: center;
+	margin-top: 16px;
 }
 .note_con>.comment_list .name,.qst_con>.comment_list .name{text-align:left;font-size:14px;}
 .center_right_con .comment_list .name,.text .name{
-    text-align: left;
+	text-align: left;
 }
 .jgpage_right_con>.message_list>.message>.name{text-align:left;}
 .center_right_con>.comment_list>li>.name> a{color:#888;font-size:14px}
@@ -543,62 +543,62 @@ a.dropdown-menu li:hover{color:#888;}
 .no-data{width: 100%;font-size: 16px;float: left;text-align: center;}
 .no-data img{width: 320px;}
 .content .center_left .bot{
-    width: 230px;
-    text-align: center;
-    position: relative;
-    transform: translateY(-20%);
-    background-color: rgba(0,0,0,0);
+	width: 230px;
+	text-align: center;
+	position: relative;
+	transform: translateY(-20%);
+	background-color: rgba(0,0,0,0);
 }
 .content .center_left .bot img{
-    margin-top: -200px;
+	margin-top: -200px;
 }
 .bot_box{
-    width: 	230px;
-    padding-top: 75px;
-    text-align: center;
-    margin-top: 70px;
-    background-color: white;
-    background:rgba(255,255,255,1);
-    border-radius:20px;
-    box-shadow: 3px 2px 3px 3px rgba(100,100,100,0.04);
+	width: 	230px;
+	padding-top: 75px;
+	text-align: center;
+	margin-top: 70px;
+	background-color: white;
+	background:rgba(255,255,255,1);
+	border-radius:20px;
+	box-shadow: 3px 2px 3px 3px rgba(100,100,100,0.04);
 }
 .bot_box div:nth-child(2){
-    font-size:18px;
-    font-family:MicrosoftYaHei;
-    color:rgba(81,81,81,1);
-    transform: translateY(-100%);
+	font-size:18px;
+	font-family:MicrosoftYaHei;
+	color:rgba(81,81,81,1);
+	transform: translateY(-100%);
 }
 .bot_box div:nth-child(3){
-    font-size:22px;
-    font-family:MicrosoftYaHei;
-    color:rgba(81,81,81,1);
-    transform: translateY(-50%)
+	font-size:22px;
+	font-family:MicrosoftYaHei;
+	color:rgba(81,81,81,1);
+	transform: translateY(-50%)
 }
 .bot_box a{
-    background-color: #15aeec;
-    background:linear-gradient(169deg,rgba(11,186,224,1),rgba(35,155,254,1));
-    border-radius: 0 0 20px 20px;
-    color: white;
-    display: inline-block;
-    width: 100%;
-    height: 60px;
-    line-height: 60px;
-    font-size:28px;
-    font-family:MicrosoftYaHei;
-    color:rgba(255,255,255,1);
+	background-color: #15aeec;
+	background:linear-gradient(169deg,rgba(11,186,224,1),rgba(35,155,254,1));
+	border-radius: 0 0 20px 20px;
+	color: white;
+	display: inline-block;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	font-size:28px;
+	font-family:MicrosoftYaHei;
+	color:rgba(255,255,255,1);
 }
 .bot_box a:hover{
-    cursor: pointer;
+	cursor: pointer;
 }
 
 /* 客服按钮 */
 #chatBtn{
-    background-color: rgb(0, 204, 205);
-    border-radius: 55px;
-    right: 24px;
-    width: 25px;
-    height: 25px;
-    display: block;
-    bottom: 24px;
-    padding: 15px;
+	background-color: rgb(0, 204, 205);
+	border-radius: 55px;
+	right: 24px;
+	width: 25px;
+	height: 25px;
+	display: block;
+	bottom: 24px;
+	padding: 15px;
 }

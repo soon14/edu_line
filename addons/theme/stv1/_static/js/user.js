@@ -5,89 +5,89 @@
  * Created by Ashang on 14-10-8.
  */
 
-var user;//鑾峰彇鐢ㄦ埛鐧诲綍璐﹀彿
-var verify;//鑾峰彇楠岃瘉鐮�
-var password;//鑾峰彇瀵嗙爜
-var password2;//鑾峰彇瀵嗙爜
-var type;//娉ㄥ唽绫诲瀷 1閭 2鎵嬫満
+var user;//获取用户登录账号
+var verify;//获取验证码
+var password;//获取密码
+var password2;//获取密码
+var type;//注册类型 1邮箱 2手机
 var this_mhm_id;
-//鎵嬫満娉ㄥ唽
+//手机注册
 function phoneReg(cate){
     $(cate).addClass("f3");
     $(cate).next().removeClass();
     $("#phoneReg").css("display","block");
     $("#emailReg").css("display","none");
 }
-//閭娉ㄥ唽
+//邮箱注册
 function emailReg(cate){
     $(cate).addClass("f3");
     $(cate).prev().removeClass();
     $("#emailReg").css("display","block");
     $("#phoneReg").css("display","none");
 }
-//閭娉ㄥ唽涓嬩竴閮�
+//邮箱注册下一部
 function onemaliNext(){
 
-    user      = $.trim($("#erusername").val());//鑾峰彇鐢ㄦ埛閭鍦板潃
-    verify    = $.trim($("#erverify").val());//鑾峰彇楠岃瘉鐮�
-    uname     = $.trim($("#eruname").val());//鑾峰彇鐢ㄦ埛鏄电О
-    password  = $.trim($("#erpasswrod").val());//鑾峰彇瀵嗙爜
-    password2 = $.trim($("#erpasswrod2").val());//鑾峰彇瀵嗙爜
-    mhm_id    = $.trim($("#this_mhm_id").val());//鏈烘瀯
-    invite_code = $.trim($("#invite_code").val());//閭€璇风爜
+    user      = $.trim($("#erusername").val());//获取用户邮箱地址
+    verify    = $.trim($("#erverify").val());//获取验证码
+    uname     = $.trim($("#eruname").val());//获取用户昵称
+    password  = $.trim($("#erpasswrod").val());//获取密码
+    password2 = $.trim($("#erpasswrod2").val());//获取密码
+    mhm_id    = $.trim($("#this_mhm_id").val());//机构
+    invite_code = $.trim($("#invite_code").val());//邀请码
 
-    //妫€鏌ヤ俊鎭槸鍚︿负绌�
+    //检查信息是否为空
     if(user == ""){
-        ui.error('璇疯緭鍏ラ偖绠�');
+        ui.error('请输入邮箱');
         return false;
     }
     if(uname == ""){
-        ui.error('璇疯緭鍏ユ樀绉�');
+        ui.error('请输入昵称');
         return false;
     }
     if(password == ""){
-        ui.error('璇疯緭鍏ュ瘑鐮�');
+        ui.error('请输入密码');
         return false;
     }
     if(password2 == ""){
-        ui.error('璇峰啀娆¤緭鍏ュ瘑鐮�');
+        ui.error('请再次输入密码');
         return false;
     }
     if(verify == ""){
-        ui.error('璇疯緭鍏ラ獙璇佺爜');
+        ui.error('请输入验证码');
         return false;
     }
 
-    //楠岃瘉閭
+    //验证邮箱
     if(!user.match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)){
-        ui.error('閭鏍煎紡閿欒');
+        ui.error('邮箱格式错误');
         return false;
     }
 
-    //楠岃瘉鏄电О
-    if( uname.length > 10){//妫€鏌ユ樀绉�
-        ui.error('鏄电О闀垮害涓嶈兘澶т簬10浣�');
+    //验证昵称
+    if( uname.length > 10){//检查昵称
+        ui.error('昵称长度不能大于10位');
         return false;
     }
 
-    //妫€鏌ュ瘑鐮�
+    //检查密码
     if( password.length<6 || password.length>20 ){
-        ui.error('瀵嗙爜闀垮害涓�6-20浣�');
+        ui.error('密码长度为6-20位');
         return false;
     }
     if( password != password2 ){
-        ui.error('涓ゆ杈撳叆瀵嗙爜涓嶄竴鑷�');
+        ui.error('两次输入密码不一致');
         return false;
     }
 
-    //妫€鏌ラ獙璇佺爜
+    //检查验证码
     if( verify.length != 4){
-        ui.error('楠岃瘉鐮侀暱搴︿笉姝ｇ‘');
+        ui.error('验证码长度不正确');
         return false;
     }
 
     if($('input[name="agreement_"]').is(":checked") == false){
-        ui.error("璇峰厛闃呰骞跺悓鎰忋€�"+SITE_KEYWORD+"缃戠珯鏈嶅姟鏉℃銆�");
+        ui.error("请先阅读并同意《"+SITE_KEYWORD+"网站服务条款》");
         return false;
     }
 
@@ -102,7 +102,7 @@ function onemaliNext(){
                 ui.error(data.info);
                 return false;
             }else{
-                ui.success("娉ㄥ唽鎴愬姛!");
+                ui.success("注册成功!");
                 location = data.data;
             }
         }
@@ -110,71 +110,71 @@ function onemaliNext(){
 }
 
 
-//鎵嬫満娉ㄥ唽涓嬩竴閮�
+//手机注册下一部
 function phoneNext(){
 
-    user      = $.trim($("#prphone").val());//鑾峰彇鐢ㄦ埛閭鍦板潃
-    verify    = $.trim($("#prverify").val());//鑾峰彇楠岃瘉鐮�
-    uname     = $.trim($("#uname").val());//鑾峰彇鐢ㄦ埛鏄电О
-    password  = $.trim($("#prpassword").val());//鑾峰彇瀵嗙爜
-    password2 = $.trim($("#prpassword2").val());//鑾峰彇瀵嗙爜
-    mount_reg = $.trim($("#mount_reg").val());//鎸傝浇鏈烘瀯
-    mhm_id    = $.trim($("#this_mhm_id").val());//鏈烘瀯
-    invite_code = $.trim($("#invite_code").val());//閭€璇风爜
-
-    //妫€鏌ヤ俊鎭槸鍚︿负绌�
+    user      = $.trim($("#prphone").val());//获取用户邮箱地址
+    verify    = $.trim($("#prverify").val());//获取验证码
+    uname     = $.trim($("#uname").val());//获取用户昵称
+    password  = $.trim($("#prpassword").val());//获取密码
+    password2 = $.trim($("#prpassword2").val());//获取密码
+    mount_reg = $.trim($("#mount_reg").val());//挂载机构
+    mhm_id    = $.trim($("#this_mhm_id").val());//机构
+    invite_code = $.trim($("#invite_code").val());//邀请码
+    
+    //检查信息是否为空
     if(user == ""){
-        ui.error('璇疯緭鍏ユ墜鏈哄彿');
+        ui.error('请输入手机号');
         return false;
     }
     if(verify == ""){
-        ui.error('璇疯緭鍏ラ獙璇佺爜');
+        ui.error('请输入验证码');
         return false;
     }
     if(uname == ""){
-        ui.error('璇疯緭鍏ユ樀绉�');
+        ui.error('请输入昵称');
         return false;
     }
     if(password == ""){
-        ui.error('璇疯緭鍏ュ瘑鐮�');
+        ui.error('请输入密码');
         return false;
     }
     if(password2 == ""){
-        ui.error('璇峰啀娆¤緭鍏ュ瘑鐮�');
+        ui.error('请再次输入密码');
         return false;
     }
 
 
-    //妫€鏌ユ墜鏈哄彿鏍煎紡
+    //检查手机号格式
     if(!user.match(PHONE_MATCH)){
-        ui.error('璇峰～鍐欐纭殑鎵嬫満鍙�!');
+        ui.error('请填写正确的手机号!');
         return false;
     }
 
-    //妫€鏌ラ獙璇佺爜
+    //检查验证码
     if( verify.length !=6 ){
-        ui.error('鎵嬫満楠岃瘉鐮侀暱搴︿笉姝ｇ‘!');
+        ui.error('手机验证码长度不正确!');
         return false;
     }
 
-    //楠岃瘉鏄电О
-    if( uname.length > 10){//妫€鏌ユ樀绉�
-        ui.error('鏄电О闀垮害涓嶈兘澶т簬10浣�');
+    //验证昵称
+    if( uname.length > 10){//检查昵称
+        ui.error('昵称长度不能大于10位');
         return false;
     }
 
-    //妫€鏌ュ瘑鐮�
+    //检查密码
     if( password.length<6 || password.length>20 ){
-        ui.error('瀵嗙爜闀垮害涓�6-20浣�');
+        ui.error('密码长度为6-20位');
         return false;
     }
     if( password != password2 ){
-        ui.error('涓ゆ杈撳叆瀵嗙爜涓嶄竴鑷�');
+        ui.error('两次输入密码不一致');
         return false;
     }
 
     if($('input[name="agreement"]').is(":checked") == false){
-        ui.error("璇峰厛闃呰骞跺悓鎰忋€�"+SITE_KEYWORD+"缃戠珯鏈嶅姟鏉℃銆�");
+        ui.error("请先阅读并同意《"+SITE_KEYWORD+"网站服务条款》");
         return ;
     }
 
@@ -189,7 +189,7 @@ function phoneNext(){
                 ui.error(data.info);
                 return false;
             }else{
-                ui.success("娉ㄥ唽鎴愬姛!");
+                ui.success("注册成功!");
                 location = data.data;
             }
         }
@@ -201,19 +201,19 @@ function dtime(){
     if(timerc > 1){
         timerc=timerc-1;
         $("#dtime").text(timerc);
-        setTimeout("dtime()", 1000); //璁剧疆1000姣浠ュ悗鎵ц涓€娆℃湰鍑芥暟
+        setTimeout("dtime()", 1000); //设置1000毫秒以后执行一次本函数
     }else{
         $('.width97').css("display","none");
         $('.width80').removeAttr("style");
     }
 }
 /**
- * 鍙戦€佹墜鏈洪獙璇佺爜
+ * 发送手机验证码
  */
 function getPhoneVerify(){
-    user=$.trim($("#prphone").val());//鑾峰彇鐢ㄦ埛鎵嬫満鍙�
+    user=$.trim($("#prphone").val());//获取用户手机号
     var phoneVerify=function(){
-        //鑾峰彇鎵嬫満楠岃瘉鐮�
+        //获取手机验证码
         $.ajax({
             type: "POST",
             url:GET_PHONEVERIFY,
@@ -235,12 +235,12 @@ function getPhoneVerify(){
         });
     }
 
-    //妫€鏌ユ墜鏈哄彿鏍煎紡
+    //检查手机号格式
     if(!user.match(PHONE_MATCH)){
-        ui.error('璇峰～鍐欐纭殑鎵嬫満鍙�!');
+        ui.error('请填写正确的手机号!');
         return false;
     }else{
-        //楠岃瘉姝ゆ墜鏈烘槸鍚﹀凡琚敞鍐�
+        //验证此手机是否已被注册
         $.ajax({
             type: "POST",
             url:CLICK_PHONE,
@@ -248,7 +248,7 @@ function getPhoneVerify(){
             dataType:"text",
             success:function(data){
                 if(data==0){
-                    ui.error('姝ゆ墜鏈哄凡琚敞鍐岋紝璇锋洿鎹�!');
+                    ui.error('此手机已被注册，请更换!');
                     return false;
                 }else{
                     phoneVerify();
@@ -259,13 +259,13 @@ function getPhoneVerify(){
     }
 }
 
-//涓存椂澶勭悊鏂规硶
+//临时处理方法
 var timerc;
 function dctime(){
     if(timerc > 1){
         timerc=timerc-1;
         $("#dctime").text(timerc);
-        setTimeout("dctime()", 1000); //璁剧疆1000姣浠ュ悗鎵ц涓€娆℃湰鍑芥暟
+        setTimeout("dctime()", 1000); //设置1000毫秒以后执行一次本函数
     }else{
         $('.width97').css("display","none");
         $('.width80').removeAttr("style");
@@ -273,16 +273,16 @@ function dctime(){
 }
 
 /**
- * 鎵惧洖瀵嗙爜鍙戦€佹墜鏈洪獙璇佺爜
+ * 找回密码发送手机验证码
  */
 function getRepPhoneVerify(){
-    phone=$.trim($("#rephoneval").val());//鑾峰彇鐢ㄦ埛鎵嬫満鍙�
-    //妫€鏌ユ墜鏈哄彿鏍煎紡
+    phone=$.trim($("#rephoneval").val());//获取用户手机号
+    //检查手机号格式
     if(!phone.match(PHONE_MATCH)){
-        ui.error('璇峰～鍐欐纭殑鎵嬫満鍙�!');
+        ui.error('请填写正确的手机号!');
         return false;
     }
-    //鑾峰彇鎵嬫満楠岃瘉鐮�
+    //获取手机验证码
     $.ajax({
         type: "POST",
         url:REPOHNE_VAR,
@@ -304,31 +304,31 @@ function getRepPhoneVerify(){
     });
 }
 
-//鐢ㄦ埛淇℃伅
+//用户信息
 function setUserInfo(){
-    var uname=$.trim($("#uname").val());//鑾峰彇鐢ㄦ埛鏄电О
-    var sex=$('input[name="sex"]:checked').val();//鑾峰彇鎬у埆
-    var profession=$("#profession").val();//鍙栧緱鑱屼笟淇℃伅
-    var intro=$.trim($("#intro").val());//鍙栧緱鐢ㄦ埛绠€浠�
-    var interest=$.trim($("#interest").val());//鍙栧緱鎰熷叴瓒ｆ暟鎹�
-    var mhm_id=$.trim($("#mhm_id").val());//鍙栧緱閫夋嫨鏈烘瀯
-    var this_mhm_id=$.trim($("#this_mhm_id").val());//鏈烘瀯
-    var city_names= $("input[name=city_names]").val();//鍦板尯淇℃伅
-    var city_ids= $("input[name=city_ids]").val();//鍦板尯淇℃伅ids
-    var province=$("#province").val();//鍙栧緱鐪�
-    var city=$("#city").val();//鍙栧緱甯�
-    var area=$("#area").val();//鍙栧緱鍖�
+    var uname=$.trim($("#uname").val());//获取用户昵称
+    var sex=$('input[name="sex"]:checked').val();//获取性别
+    var profession=$("#profession").val();//取得职业信息
+    var intro=$.trim($("#intro").val());//取得用户简介
+    var interest=$.trim($("#interest").val());//取得感兴趣数据
+    var mhm_id=$.trim($("#mhm_id").val());//取得选择机构
+    var this_mhm_id=$.trim($("#this_mhm_id").val());//机构
+    var city_names= $("input[name=city_names]").val();//地区信息
+    var city_ids= $("input[name=city_ids]").val();//地区信息ids
+    var province=$("#province").val();//取得省
+    var city=$("#city").val();//取得市
+    var area=$("#area").val();//取得区
     var ckemailreg=function(){
-        /*if(province==0){//妫€鏌ョ渷
-            ui.error('璇烽€夋嫨鍦板尯鎵€鍦ㄧ渷!');
+        /*if(province==0){//检查省
+            ui.error('请选择地区所在省!');
              return false;
         }
-        if(city==0){//妫€鏌ュ競
-            ui.error('璇烽€夋嫨鎵€鍦ㄥ煄甯�!');
+        if(city==0){//检查市
+            ui.error('请选择所在城市!');
              return false;
         }*/
-        // if(mhm_id==0){//妫€鏌ユ満鏋�
-        //    ui.error('璇烽€夋嫨鏈烘瀯!');
+        // if(mhm_id==0){//检查机构
+        //    ui.error('请选择机构!');
         // 	 return false;
         // }
         var udata;
@@ -348,7 +348,7 @@ function setUserInfo(){
                     ui.error(data.info);
                     return false;
                 }else{
-                    ui.success("娉ㄥ唽鎴愬姛!");
+                    ui.success("注册成功!");
                     location = data.data;
                 }
             }
@@ -359,8 +359,8 @@ function setUserInfo(){
     if(user=="" || password==""){
         return false;
     }
-    if(uname=="" || uname.length>6){//妫€鏌ユ樀绉�
-        ui.error('鏄电О闀垮害涓嶆纭�!');
+    if(uname=="" || uname.length>6){//检查昵称
+        ui.error('昵称长度不正确!');
         return false;
     }else{
         $.ajax({
@@ -370,7 +370,7 @@ function setUserInfo(){
             dataType:"text",
             success:function(data){
                 if(data==0){
-                    ui.error('姝ゆ樀绉板凡琚敞鍐岋紝璇锋洿鎹�!');
+                    ui.error('此昵称已被注册，请更换!');
                     return false;
                 }else{
                     ckemailreg();
@@ -386,7 +386,7 @@ function setUserInfo(){
 
 }
 /**
- * 鐢ㄦ埛澶村儚璁剧疆
+ * 用户头像设置
  */
 /*function setUserFace(){
 
@@ -395,7 +395,7 @@ function setUserInfo(){
 
 
 }*/
-/*//鐧诲綍鎸変笅鍥炶溅
+/*//登录按下回车
 $("#log_username").keydown(function(event){
     if(event.keyCode == 13){
         logSub();
@@ -407,15 +407,15 @@ $("#log_pwd").keydown(function(event){
     }
 });*/
 /**
- * 鐢ㄦ埛鎴愬姛璁剧疆澶村儚
+ * 用户成功设置头像
  */
 /*function avatarOk(){
- ui.success("璁剧疆鎴愬姛锛�");
+ ui.success("设置成功！");
     location.reload();
 }*/
 
 /**
- * 杩斿洖涓婁竴姝�
+ * 返回上一步
  */
 function prevBang(){
     $(".reg_set_info").css("display","block");
@@ -424,7 +424,7 @@ function prevBang(){
     $("#loging-worap-regsiter").css("z-index","1001");
 }
 
-//璇锋眰浜嬩欢
+//请求事件
 function ajaxBang(url,clickid,fdata,callback,type){
 
     if(fdata!=""){
@@ -441,38 +441,38 @@ function ajaxBang(url,clickid,fdata,callback,type){
         }
     });
 }
-//杩藉姞html
+//追加html
 function appendHtml(data,clickid,type){
     $(".more").remove();
     $('.user-imglist').html('');
     if(data.data==""){
         var text = '';
         if( clickid == 'getbuyvideoslist') {
-            text = '鎮ㄨ繕娌℃湁璐拱璇剧▼';
+            text = '您还没有购买课程';
         } else if( clickid == 'getcollectvideolist' ) {
-            text = '鎮ㄨ繕娌℃湁鏀惰棌璇剧▼';
+            text = '您还没有收藏课程';
         } else if( clickid == 'getbuyalbumslist' ) {
-            text = '鎮ㄨ繕娌℃湁璐拱鐝骇';
+            text = '您还没有购买班级';
         }
         else if( clickid == 'getupvideoslist') {
-            text = '鎮ㄨ繕娌℃湁涓婁紶璇剧▼';
+            text = '您还没有上传课程';
         }
         else if( clickid == 'getbuyliveslist') {
-            text = '鎮ㄨ繕娌℃湁璐拱鐩存挱';
+            text = '您还没有购买直播';
         }
         else if( clickid == 'getcollectlivelist') {
-            text = '鎮ㄨ繕娌℃湁鏀惰棌鐩存挱';
+            text = '您还没有收藏直播';
         }
         else if( clickid == 'getmyvideolist' ){
-            text = '鎮ㄨ繕娌℃湁涓婁紶璇剧▼';
+            text = '您还没有上传课程';
         } else if( clickid == 'getTeacherVideo' ){
-            text = '鎮ㄨ繕娌℃湁涓婁紶鐐规挱璇剧▼';
+            text = '您还没有上传点播课程';
         } else if( clickid == 'getTeacherLive' ){
-            text = '鎮ㄨ繕娌℃湁涓婁紶鐩存挱璇剧▼';
+            text = '您还没有上传直播课程';
         } else if( clickid == 'getTeacherFace' ){
-            text = '鎮ㄨ繕娌℃湁涓婁紶闈㈡巿璇剧▼';
+            text = '您还没有上传面授课程';
         }else {
-            text = '鎮ㄨ繕娌℃湁鏀惰棌鐝骇';
+            text = '您还没有收藏班级';
         }
         $('.user-Release-l').hide();
         $(".user-imglist").append("<span>"+text+"</span>");
@@ -483,14 +483,14 @@ function appendHtml(data,clickid,type){
     if(data.nowPage+1>data.totalPages){
         return false;
     }else{
-        var html="<div class=\"more\" ><a href=\"javascript:void(0)\" onclick='fallBang(this)' id=\""+clickid+"\">鏌ョ湅鏇村</a></div>"
+        var html="<div class=\"more\" ><a href=\"javascript:void(0)\" onclick='fallBang(this)' id=\""+clickid+"\">查看更多</a></div>"
         $(".user-imglist").append(html);
-        p=data.nowPage+1;//涓嬩竴椤�
+        p=data.nowPage+1;//下一页
     }
 
 }
 /**
- * 閫夐」鍗℃晥鏋�
+ * 选项卡效果
  * @param cate
  */
 function magbtn(cate){
@@ -506,7 +506,7 @@ function magbtn(cate){
 }
 var onstatus;
 /**
- * 鐧诲綍娉ㄥ唽椤甸潰
+ * 登录注册页面
  */
 function reg_login(){
     var count = $("#transparent");
@@ -535,7 +535,7 @@ function reg_login(){
 }
 
 /**
- * 閫€鍑烘垚鍔�
+ * 退出成功
  */
 function logout(){
     $.ajax({
@@ -544,19 +544,19 @@ function logout(){
         url:LOGINOUT_ADDRESS,
         dataType:"json",
         success:function(data){
-            ui.success("閫€鍑烘垚鍔燂紒");
+            ui.success("退出成功！");
             location.reload();
         }
     });
 
 }
 /**
- * 鍙栨秷娉ㄥ唽
+ * 取消注册
  */
 function removeReg(){
     $("#transparent").css("display","none");
 }
-/*//鐐瑰嚮鍘婚櫎鎻愮ず淇℃伅
+/*//点击去除提示信息
 $("#username").live("focus",function(){
     $("#usernameMeg").css("display","none")
 });
@@ -572,7 +572,7 @@ $("#okpwd").live("focus",function(){
 
 
 /**
- * 娉ㄥ唽Ajax
+ * 注册Ajax
  */
 function okReg(){
     if(!email_status){
@@ -590,7 +590,7 @@ function okReg(){
     if(!$("#okxy").attr("checked")){
         return false;
     }
-    //寮€濮嬪紓姝ユ敞鍐�
+    //开始异步注册
     $.ajax({
         type: "POST",
         url:REG_ADDRESS,
@@ -600,7 +600,7 @@ function okReg(){
             if(data==500){
                 return false;
             }else{
-                ui.success('娉ㄥ唽鎴愬姛!');
+                ui.success('注册成功!');
                 location.reload();
             }
         }
@@ -608,7 +608,7 @@ function okReg(){
 
 }
 /**
- * 鎼滅储妗�
+ * 搜索框
  * @returns {boolean}
  */
 function checkSearch(){
@@ -622,7 +622,7 @@ function checkSearch(){
     }
 }
 /**
- * 闂瓟鎼滅储妗�
+ * 问答搜索框
  * @returns {boolean}
  */
 function checkWendaSearch(){
@@ -636,22 +636,22 @@ function checkWendaSearch(){
     }
 }
 /**
- * 寮傛鐧诲綍
+ * 异步登录
  */
 function logSub(){
     var log_username=$.trim($("#log_username").val());
     var log_pwd=$.trim($("#log_pwd").val());
     if(log_username=="" || log_username.length<2){
-        ui.error('璐﹀彿鏍煎紡涓嶆纭�!');
+        ui.error('账号格式不正确!');
         return false;
     }
     if(log_pwd=="" || log_pwd.length<6){
-        ui.error('瀵嗙爜鏍煎紡涓嶆纭�!');
+        ui.error('密码格式不正确!');
         return false;
     }
-    $("#logSub").val("鐧诲綍涓�..");
+    $("#logSub").val("登录中..");
     $("#logSub").css("disabled","true");
-    //寮€濮嬪紓姝ョ櫥褰�
+    //开始异步登录
     $.ajax({
         type: "POST",
         url:LOGIN_ADDRESS,
@@ -659,7 +659,7 @@ function logSub(){
         dataType:"json",
         success:function(data){
             if(data.status=='0'){
-                $("#logSub").val("鐧诲綍");
+                $("#logSub").val("登录");
                 $("#logSub").css("disabled","false");
                 ui.error(data.info);
                 return false;
@@ -672,15 +672,15 @@ function logSub(){
     });
 }
 
-//鎵惧洖瀵嗙爜js  寮€濮�---------------
-//鎵嬫満楠岃瘉
+//找回密码js  开始---------------
+//手机验证
 function repPhone(cate){
     $(cate).addClass("f3");
     $(cate).next().removeClass();
     $("#repPhone").css("display","block");
     $("#repEmail").css("display","none");
 }
-//閭楠岃瘉
+//邮箱验证
 function repEmail(cate){
     $(cate).addClass("f3");
     $(cate).prev().removeClass();
@@ -689,30 +689,30 @@ function repEmail(cate){
 }
 
 /**
- * 纭閫氳繃鎵嬫満閲嶇疆瀵嗙爜
+ * 确认通过手机重置密码
  */
 function okPhonepwd(cate){
     $("p").text("");
-    var phone=$.trim($("#rephoneval").val());//鑾峰彇鐢ㄦ埛鎵嬫満鍙�
-    var pverify=$.trim($("#repverval").val());//鑾峰彇楠岃瘉鐮�
-    var pwd=$.trim($("#ppwd").val());//鑾峰彇鏂板瘑鐮�
-    var pwds=$.trim($("#ppwds").val());//鑾风‘璁ゅ瘑鐮�
+    var phone=$.trim($("#rephoneval").val());//获取用户手机号
+    var pverify=$.trim($("#repverval").val());//获取验证码
+    var pwd=$.trim($("#ppwd").val());//获取新密码
+    var pwds=$.trim($("#ppwds").val());//获确认密码
     if( !phone.match(PHONE_MATCH)){
-        ui.error("鎵嬫満鏍煎紡涓嶆纭紒");
+        ui.error("手机格式不正确！");
         return false;
     }
 
     if(pwd.length<6 || pwd.length>20){
-        ui.error("鏂板瘑鐮侀暱搴︿笉姝ｇ‘锛�");
+        ui.error("新密码长度不正确！");
         return false;
     }
     if(pwds!=pwd){
-        ui.error("涓ゆ瀵嗙爜杈撳叆涓嶄竴鑷�");
+        ui.error("两次密码输入不一致");
         return false;
     }
     $(cate).attr("disabled","disabled");
-    $(cate).val("鎻愪氦涓�....");
-    //淇敼瀵嗙爜
+    $(cate).val("提交中....");
+    //修改密码
     $.ajax({
         type: "POST",
         url:REPWDHANDLE,
@@ -721,7 +721,7 @@ function okPhonepwd(cate){
         success:function(data){
             if(data.status=='0'){
                 $(cate).removeAttr('disabled');
-                $(cate).val("纭畾");
+                $(cate).val("确定");
                 ui.error(data.info);
                 return false;
             }else{
@@ -732,20 +732,20 @@ function okPhonepwd(cate){
     });
 }
 /**
- * 閭鎵惧洖瀵嗙爜
+ * 邮箱找回密码
  */
 function repEmailNext(cate){
 
-    var email=$.trim($("#repemail").val());//鑾峰彇鐢ㄦ埛鎵嬫満鍙�
-    var code=$.trim($("#repcode").val());//鑾峰彇鐢ㄦ埛鎵嬫満鍙�
+    var email=$.trim($("#repemail").val());//获取用户手机号
+    var code=$.trim($("#repcode").val());//获取用户手机号
     if(!email.match(/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/)){
-        ui.error("閭涓嶆纭�");
+        ui.error("邮箱不正确");
         return false;
     }
 
     $(cate).attr("disabled","disabled");
-    $(cate).val("鎻愪氦涓�....");
-    //淇敼瀵嗙爜
+    $(cate).val("提交中....");
+    //修改密码
     $.ajax({
         type: "POST",
         url:REPWDEMAIL,
@@ -754,7 +754,7 @@ function repEmailNext(cate){
         success:function(data){
             if(data.status=='0'){
                 $(cate).removeAttr('disabled');
-                $(cate).val("涓嬩竴姝�");
+                $(cate).val("下一步");
                 ui.error(data.info);
                 return false;
             }else{
@@ -766,4 +766,5 @@ function repEmailNext(cate){
     });
 
 }
+
 
