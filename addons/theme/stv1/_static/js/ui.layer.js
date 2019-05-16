@@ -1,42 +1,42 @@
 requireJS(THEME_URL + '/js/layer/layer.js');
-// 操作成功
-// ui.success('操作成功');
-// ui.error('操作失败');
-// 操作成功并跳转到指定地址;
-// ui.success('操作成功',{
+// 鎿嶄綔鎴愬姛
+// ui.success('鎿嶄綔鎴愬姛');
+// ui.error('鎿嶄綔澶辫触');
+// 鎿嶄綔鎴愬姛骞惰烦杞埌鎸囧畾鍦板潃;
+// ui.success('鎿嶄綔鎴愬姛',{
 //     end:function(){
-//         window.location.href = '跳转的地址'
+//         window.location.href = '璺宠浆鐨勫湴鍧€'
 //     }
 // });
-// 默认提示信息在1.8s后消失,可以指定时间,单位秒,为0时不消失
-// 操作成功,且在5s后消失
-// ui.success('操作成功',{
+// 榛樿鎻愮ず淇℃伅鍦�1.8s鍚庢秷澶�,鍙互鎸囧畾鏃堕棿,鍗曚綅绉�,涓�0鏃朵笉娑堝け
+// 鎿嶄綔鎴愬姛,涓斿湪5s鍚庢秷澶�
+// ui.success('鎿嶄綔鎴愬姛',{
 //     time:5
 // });
-// 默认的提示框不具有按钮,可以使用btn参数设置按钮
-// ui.success('操作成功',{
-//     btn:['好的知道了']
+// 榛樿鐨勬彁绀烘涓嶅叿鏈夋寜閽�,鍙互浣跨敤btn鍙傛暟璁剧疆鎸夐挳
+// ui.success('鎿嶄綔鎴愬姛',{
+//     btn:['濂界殑鐭ラ亾浜�']
 // });
-// 询问弹出层,默认存在两个按钮,['确定','取消'],可以使用btn参数自行指定
-// ui.confirm('是否确定删除?',{
+// 璇㈤棶寮瑰嚭灞�,榛樿瀛樺湪涓や釜鎸夐挳,['纭畾','鍙栨秷'],鍙互浣跨敤btn鍙傛暟鑷鎸囧畾
+// ui.confirm('鏄惁纭畾鍒犻櫎?',{
 //     yes:function(){
-//         ui.success('你确定了');
+//         ui.success('浣犵‘瀹氫簡');
 //     },
 //     btn2:function(){
-//         ui.error('你取消了');
+//         ui.error('浣犲彇娑堜簡');
 //     }
 // });
 /**
- * PC窗体对象，全站使用，统一窗体接口
+ * PC绐椾綋瀵硅薄锛屽叏绔欎娇鐢紝缁熶竴绐椾綋鎺ュ彛
  */
 var ui = {
     open: function(config) {
         layer.open(config);
     },
     /**
-     *  操作成功显示API
-     * @param string message 信息内容
-     * @param integer time 展示时间
+     *  鎿嶄綔鎴愬姛鏄剧ずAPI
+     * @param string message 淇℃伅鍐呭
+     * @param integer time 灞曠ず鏃堕棿
      * @return void
      */
     success: function(message, config) {
@@ -47,16 +47,16 @@ var ui = {
             btn: false,
             title: '',
             closeBtn: 0,
-            content: typeof(message) == 'null' ? '服务器走神了' : message 
+            content: typeof(message) == 'null' ? '鏈嶅姟鍣ㄨ蛋绁炰簡' : message
         };
         var config = config ? $.extend(_config, config) : _config;
         config.time = config.time * 1000;
         layer.open(config);
     },
     /**
-     * 操作出错显示API
-     * @param string message 信息内容
-     * @param integer time 展示时间
+     * 鎿嶄綔鍑洪敊鏄剧ずAPI
+     * @param string message 淇℃伅鍐呭
+     * @param integer time 灞曠ず鏃堕棿
      * @return void
      */
     error: function(message, config) {
@@ -67,25 +67,25 @@ var ui = {
             btn: false,
             title: '',
             closeBtn: 0,
-            content: typeof(message) == 'null' ? '服务器走神了' : message
+            content: typeof(message) == 'null' ? '鏈嶅姟鍣ㄨ蛋绁炰簡' : message
         };
         var config = config ? $.extend(_config, config) : _config;
         config.time = config.time * 1000;
         layer.open(config);
     },
     /**
-     * 确认弹框显示API - 浮窗型
+     * 纭寮规鏄剧ずAPI - 娴獥鍨�
      * @example
-     * 可以加入callback，回调函数
-     * @param object o 定位对象
-     * @param string text 提示语言
-     * @param string|function _callback 回调函数名称
+     * 鍙互鍔犲叆callback锛屽洖璋冨嚱鏁�
+     * @param object o 瀹氫綅瀵硅薄
+     * @param string text 鎻愮ず璇█
+     * @param string|function _callback 鍥炶皟鍑芥暟鍚嶇О
      * @return void
      */
     confirm: function(message, config) {
         var _config = {
             icon: 3,
-            btn: ['确定', '取消'],
+            btn: ['纭畾', '鍙栨秷'],
             offset:'300px',
             title: '',
             closeBtn: 0,
@@ -103,8 +103,8 @@ var ui = {
         layer.open(config);
     },
     /**
-     * 私信弹窗API
-     * @param string touid 收件人ID
+     * 绉佷俊寮圭獥API
+     * @param string touid 鏀朵欢浜篒D
      * @return void
      */
     sendmessage: function(touid, editable) {
@@ -116,11 +116,11 @@ var ui = {
             editable = 1;
         }
         touid = touid || '';
-        this.box.load(U('basic/Message/post') + '&touid=' + touid + '&editable=' + editable, '发私信');
+        this.box.load(U('basic/Message/post') + '&touid=' + touid + '&editable=' + editable, '鍙戠淇�');
     },
     /**
-     * @Me弹窗API
-     * @param string touid @人ID
+     * @Me寮圭獥API
+     * @param string touid @浜篒D
      * @return void
      */
     sendat: function(touid) {
@@ -128,9 +128,9 @@ var ui = {
         this.box.load(U('basic/Mention/at') + '&touid=' + touid, '@TA');
     },
     /**
-     * 弹窗发布微博
-     * @param string title 弹窗标题
-     * @param string initHTML 插入内容
+     * 寮圭獥鍙戝竷寰崥
+     * @param string title 寮圭獥鏍囬
+     * @param string initHTML 鎻掑叆鍐呭
      * @return void
      */
     sendbox: function(title, initHtml, channelID) {
@@ -143,45 +143,45 @@ var ui = {
         });
     },
     /**
-     * 回复弹窗API
-     * @param integer comment_id 评论ID
+     * 鍥炲寮圭獥API
+     * @param integer comment_id 璇勮ID
      * @return void
      */
     reply: function(comment_id) {
-        this.box.load(U('basic/Comment/reply') + '&comment_id=' + comment_id, '回复', function() {
+        this.box.load(U('basic/Comment/reply') + '&comment_id=' + comment_id, '鍥炲', function() {
             $('#at-view').hide();
         });
     },
     groupreply: function(comment_id, gid) {
-        this.box.load(U('group/Group/reply') + '&gid=' + gid + '&comment_id=' + comment_id, "回复", function() {
+        this.box.load(U('group/Group/reply') + '&gid=' + gid + '&comment_id=' + comment_id, "鍥炲", function() {
             $('#at-view').hide();
         });
     },
     /**
-     * 选择部门弹窗API - 暂不使用
+     * 閫夋嫨閮ㄩ棬寮圭獥API - 鏆備笉浣跨敤
      */
     changeDepartment: function(hid, showname, sid, nosid, notop) {
-        this.box.load(U('widget/Department/change') + '&hid=' + hid + '&showName=' + showname + '&sid=' + sid + '&nosid=' + nosid + '&notop=' + notop, '部门选择');
+        this.box.load(U('widget/Department/change') + '&hid=' + hid + '&showName=' + showname + '&sid=' + sid + '&nosid=' + nosid + '&notop=' + notop, '閮ㄩ棬閫夋嫨');
     },
     /**
-     * 自定弹窗API接口
+     * 鑷畾寮圭獥API鎺ュ彛
      */
     box: {
         /**
-         * 关闭窗口
-         * @param function fn 回调函数名称
+         * 鍏抽棴绐楀彛
+         * @param function fn 鍥炶皟鍑芥暟鍚嶇О
          * @return void
          */
         close: function() {
             layer.closeAll();
         },
         /**
-         * 载入弹窗API
-         * @param string requestUrl 请求地址
-         * @param string title 弹窗标题
-         * @param string callback 窗口关闭后的回调事件
+         * 杞藉叆寮圭獥API
+         * @param string requestUrl 璇锋眰鍦板潃
+         * @param string title 寮圭獥鏍囬
+         * @param string callback 绐楀彛鍏抽棴鍚庣殑鍥炶皟浜嬩欢
          * @param object requestData requestData
-         * @param string type Ajax请求协议，默认为GET
+         * @param string type Ajax璇锋眰鍗忚锛岄粯璁や负GET
          * @return void
          */
         load: function(requestUrl, title, callback, requestData, type,config) {

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="../highcharts/code/highcharts.js"></script>
+    <script src="../highcharts/code/modules/series-label.js"></script>
+    <script src="../highcharts/code/modules/exporting.js"></script>
+    <script src="../highcharts/code/modules/export-data.js"></script>
+</head>
+<body>
+<div id="container2" style="width: 1200px;height: 300px"></div>
+</body>
+<script type="text/javascript">
+/*
+    /!*<![CDATA[*!/
+    $(function(){
+        $.ajax({
+            url:'http://localhost:8080/test1/findUserRegister',
+            type:'get',
+            dataType:'json',
+            success:function(data){
+                Highcharts.chart('container2',{
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '当前月份根据日期分布'
+                    },
+                    subtitle: {
+                        text: '数据来源: WorldClimate.com'
+                    },
+                    xAxis: {
+                        categories: [data[0].name,data[1].name]
+                    },
+                    yAxis: {
+                        labels: {
+                            x: -15
+                        },
+                        title: {
+                            text: '项目'
+                        }
+                    },
+                    tooltip: {
+                        // head + 每个 point + footer 拼接成完整的 table
+                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+                        footerFormat: '</table>',
+                        shared: true,
+                        useHTML: true
+                    },
+                    plotOptions: {
+                        column: {
+                            borderWidth: 0
+                        }
+                    },
+                    series: [{
+                        name: '1809B用户类型对比图',
+                        colorByPoint: true,
+                        data: data
+                    }]
+                });
+            },error:function(){
+            }
+        })
+    })
+  /!*]]>*!/*/
+     /*<![CDATA[*/
+    $(function(){
+        initOne();
+    })
+    function  initOne(){
+        $.ajax({
+            url:"http://localhost:8080/test1/findUserRegister",
+            dataType:"json",
+            success:function(data){
+                var chart = Highcharts.chart('container2', {
+                    chart: {
+                        type:'spline'
+                    },
+                    title: {
+                        text: '访问统计'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    yAxis: {
+                        title: {
+                            text: '次数'
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle'
+                    },
+                    plotOptions: {
+                        series: {
+                            label: {
+                                connectorAllowed: false
+                            },
+                            pointStart: 0
+                        }
+                    },
+                    series: [{
+                        name: '用户活跃度',
+                        colorByPoint: true,
+                        data: data
+                    }],
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+                });
+            }
+        })
+    }
+    /*]]>*/
+</script>
+</html>

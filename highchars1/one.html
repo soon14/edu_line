@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="../highcharts/code/highcharts.js"></script>
+    <script src="../highcharts/code/modules/series-label.js"></script>
+    <script src="../highcharts/code/modules/exporting.js"></script>
+    <script src="../highcharts/code/modules/export-data.js"></script>
+</head>
+<body>
+<div id="container2" style="width: 1200px;height: 300px"></div>
+<br/><br/>
+<center>
+<div id="container"  style="width: 50%;height:300px;margin: 0 auto;"></div>
+</center>
+</body>
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $(function(){
+        initOne();
+        initTwo();
+    })
+    function  initOne(){
+        $.ajax({
+            url:"http://localhost:8080/test1/findTwo",
+            dataType:"json",
+            success:function(data){
+                var chart = Highcharts.chart('container2', {
+                    chart: {
+                        type:'spline'
+                    },
+                    title: {
+                        text: '访问统计'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    yAxis: {
+                        title: {
+                            text: '次数',
+                        }
+                    },
+                    legend: {
+                        layout: 'vertical',
+                        align: 'right',
+                        verticalAlign: 'middle',
+
+                    },
+                    plotOptions: {
+                        series: {
+                            label: {
+                                connectorAllowed: false
+                            },
+                            pointStart: 0
+                        }
+                    },
+                    series: [{
+                        name: '登录用户访问的次数',
+                        colorByPoint: true,
+                        data: data
+                    }],
+                    responsive: {
+                        rules: [{
+                            condition: {
+                                maxWidth: 500
+                            },
+                            chartOptions: {
+                                legend: {
+                                    layout: 'horizontal',
+                                    align: 'center',
+                                    verticalAlign: 'bottom'
+                                }
+                            }
+                        }]
+                    }
+                });
+            }
+        })
+    }
+     function initTwo(){
+         $.ajax({
+             url:'http://localhost:8080/test1/findOne',
+             type:'get',
+             contentType: "application/json",
+             dataType:'json',
+             success:function(data){
+                 Highcharts.chart('container', {
+                     chart: {
+                         plotBackgroundColor: null,
+                         plotBorderWidth: 5,
+                         plotShadow: false,
+                         type: 'pie'
+                     },
+                     title: {
+                         text: '访问统计分布情况'
+                     },
+                     subtitle: {
+                         text: '访问统计分布情况'
+                     },
+                     tooltip: {
+                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                     },
+                     plotOptions: {
+                         pie: {
+                             allowPointSelect: true,
+                             cursor: 'pointer',
+                             dataLabels: {
+                                 enabled: true,
+                                 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                                 style: {
+                                     color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'blue'
+                                 }
+                             }
+                         }
+                     },
+                     series: [{
+                         name: '',
+                         colorByPoint: true,
+                         data: data
+                     }]
+                 });
+             },error:function(){
+             }
+         })
+     }
+    /*]]>*/
+</script>
+</html>

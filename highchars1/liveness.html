@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Insert title here</title>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script src="../highcharts/code/highcharts.js"></script>
+    <script src="../highcharts/code/modules/series-label.js"></script>
+    <script src="../highcharts/code/modules/exporting.js"></script>
+    <script src="../highcharts/code/modules/export-data.js"></script>
+</head>
+<body>
+<div id="container2" style="width: 1200px;height: 300px"></div>
+</body>
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $(function(){
+        initOne();
+    })
+    var chart;
+    var current_time=1;
+    //在横坐标中有时我们是需要指定坐标上每个坐标点需要显示的文字内容的，这时我们需要使用到一个categories属性，通过将一个数组值传给categories属性，这样在横坐标上的每个坐标点就会     按照指定的属性内容显示坐标点信息。为了实现如上目的，我们需要再设置一个变量，并将这个变量赋予categories属性
+    var x_arr = ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00',
+        '6:00', '7:00', '8:00', '9:00', '10:00', '11:00',
+        '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
+        '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+    function  initOne(){
+        $.ajax({
+            url:"http://localhost:8080/test1/findTwo",
+            dataType:"json",
+            success:function(data){
+                var chart = Highcharts.chart('container2', {
+                    chart: {
+                        renderTo: 'container',
+                        type: 'line',
+                        marginRight: 130,
+                        marginBottom: 80,
+                        events: {
+                            load:loadTime
+                        }
+                    },
+                    title: {
+                        text: '访问统计'
+                    },
+                    subtitle: {
+                        text: ''
+                    },
+                    xAxis: {
+                        title: {
+                            enabled: true,
+                            text: '时间（小时）'
+                        },
+                        //x_arr 在横坐标中有时我们是需要指定坐标上每个坐标点需要显示的文字内容的，这时我们需要使用到一个categories属性，通过将一个数组值传给categories属性，这样在横坐标上的每个坐标点就会按照指定的属性内容显示坐标点信息。为了实现如上目的，我们需要再设置一个变量，并将这个变量赋予categories属性。
+                        //横坐标上就是按照我们在x_arr变量中设定的内容显示的。如果设定的内容少于横坐标的坐标点，则前面的坐标点将按x_arr变量中设定内容显示，后面的坐标点将按默认的坐标点信息显示。
+                        categories: x_arr,
+                        max: 23,
+                        min: 0,
+                        tickPixelInterval: 50
+                    },
+                    yAxis: {
+                        title: {
+                            text: '次数'
+                        }
+                    },
+                    legend: {
+                        x: -50,
+                        y: 10,
+                        enabled: true
+                    },
+                    exporting: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        line: {
+                            gapSize: 100
+                        }
+                    },
+                    series: [{
+                        name: '用户活跃度',
+                        data: getFirstData()
+                    }]
+                });
+            }
+        })
+    }
+    function loadTime(){
+        window.setTimeout(getData,TIMEOUT);
+    }
+    function getFirstData() {
+        var data = [];
+        var y_mx = Math.round(Math.random() * 10);
+        var i;
+
+        for (i = 0; i <= 0; i++) {
+            data.push({
+                x: current_time,
+                y: y_mx
+            });
+            if (current_time <= 23) {
+                current_time++;
+            }
+        }
+        return data;
+    }
+    // 这个函数是用来模拟初始化chart对象时，获得的大桥桥面温度值。其返回的是一个数组对象，数组中的每个对象包含x、y属性，这两个属性用来告诉chart对象x轴的某个坐标上面的y值是多少，并在此处显示一个坐标点，同时将连接相邻两个坐标点形成曲线。代码中的current_time是一个全局变量，用来对当前采集显示次数进行计数。
+    function getData() {
+        var current_x = x_arr[current_time];
+
+        //获取最大值
+        var series_mx = chart.series[0];
+        var y_mx = Math.round(Math.random() * 10);
+
+        series_mx.addPoint([current_time, y_mx], true, false);
+
+        current_time++;
+
+        if (current_time <= 23) {
+            window.setTimeout(getData, 1000);
+        }
+    }
+    /*]]>*/
+</script>
+</html>

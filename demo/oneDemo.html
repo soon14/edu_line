@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="../echars/echarts-4.0.js"></script>
+<script src="../echars/echarts-util.js"></script>
+<!-- 引入my97 -->
+<script src="../my97/WdatePicker.js"></script>
+<body>
+<input type="button" value="最近7天" onclick="getzhexian(1,null,null)">
+<input type="button" value="最近15天" onclick="getzhexian(2,null,null)">
+<input type="button" value="最近30天" onclick="getzhexian(3,null,null)">
+<button type="button" class="btn btn-primary" onclick="getZhexian(1,null,null)">最近7天</button>
+<button type="button" class="btn btn-primary" onclick="getZhexian(2,null,null)">最近15天</button>
+<button type="button" class="btn btn-primary" onclick="getZhexian(3,null,null)">最近30天</button>
+<div style="float: right"><label >日期范围</label> <input
+        class="form-control;col-md-3"  id="mintime"
+        onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'maxtime\')}'})" onblur="byDate()" />至 <input
+        class="form-control;col-md-3" id="maxtime"
+        onfocus="WdatePicker({minDate:'#F{$dp.$D(\'mintime\')}'})" onblur="byDate()" /><br /></div>
+<div id="container" style="height:300px;width:800px"></div>
+<div id="dom" style="width:600px;height: 300px"></div>
+</body>
+<script>
+    function byDate() {
+        var mintime=  $("#mintime").val();
+        var maxtime=  $("#maxtime").val();
+        getzhexian(null,maxtime,mintime);
+    }
+    function getzhexian(type,maxdate,mindate){
+        var dom=document.getElementById("dom");
+        var myEcharts= echarts.init(dom);
+        $.ajax({
+            url:"http://localhost:8080/test1/getzhexianTu",
+            type:"get",
+            data:{
+                "type":type,
+                "maxdate":maxdate,
+                "mindate":mindate
+            },
+            success:function (data) {
+                var option= zhuEcharts.line(data,1,'标题');//1代表折线图的样式
+                myEcharts.setOption(option);
+            },error:function () {
+
+            }
+        });
+    }
+    $(function () {
+        getzhexian(1,null,null);
+    });
+
+
+</script>
+</html>

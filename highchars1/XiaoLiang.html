@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://try.51eduline.com/apps/admin/_static/css/admin.css" rel="stylesheet" type="text/css">
+    <script>
+        /**
+         * 全局变量
+         */
+        var SITE_URL  = 'http://try.51eduline.com';
+        var THEME_URL = 'http://try.51eduline.com/addons/theme/stv1/_static';
+        var APPNAME   = 'admin';
+        var UPLOAD_URL ='http://try.51eduline.com/data/upload';
+        var MID		  = '1043';
+        var UID		  = '1043';
+        var initNums  =  '140';
+        // Js语言变量
+        var LANG = new Array();
+        var info = {icon:0,time:1800,btn:false,title:'',closeBtn:0};
+        var success = {icon:1,time:1800,btn:false,title:'',closeBtn:0};
+        var error = {icon:2,time:1800,btn:false,title:'',closeBtn:0};
+    </script>
+    <script type="text/javascript" src="../addons/theme/stv1/_static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../addons/theme/stv1/_static/js/core.js"></script>
+    <script type="text/javascript" src="../apps/admin/_static/js/module.js"></script>
+    <script src="../addons/theme/stv1/_static/js/common.js"></script>
+    <script src="../addons/theme/stv1/_static/js/module.common.js"></script>
+    <script type="text/javascript" src="../apps/admin/_static/js/admin.js"></script>
+    <script type="text/javascript" src="../addons/theme/stv1/_static/js/ui.layer.js"></script>
+    <!--非admin应用的后台js脚本统一写在  模板风格对应的app目录下的admin.js中-->
+    <style>
+        @font-face {font-family: 'iconfontNEW';src: url('../addons/theme/stv1/_static/icon/iconfontNEW.woff?v={$site.sys_version}');}
+        .iconfontNEW{font-family: iconfontNEW;font-style: normal;}
+    </style>
+</head>
+<body>
+<style type="text/css">
+    .tit_tab { margin: 10px 0; }
+    .tit_tab input{ margin-top: 5px; }
+</style>
+<div id="container" class="so_main">
+    <style type="text/css">
+        .tit_tab{border-bottom: none;}
+        .tit_tab li a.on{border-bottom:none;color: #FFF;display: inline-block;background: #3b5999;}
+        .tit_tab li a{padding: 0px 10px;}
+    </style>
+    <!-- START LIST -->
+    <div id="courseSales_chart" style="width: 100%;height:300px;">
+    </div>
+    <script  type="text/javascript" src="../addons/theme/stv1/_static/js/echarts/echarts.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            // 查询讲师
+            $("select[name='mhm_id']").change(function(){
+                // 获取当前选择的机构
+                var mhm_id = $(this).val();
+                if(mhm_id == '0'){
+                    $("select[name='teacher_id']").html('').hide();
+                    $("select[name='teacher_id']").prev('span').show();
+                    return false;
+                }
+                $.get('http://try.51eduline.com/index.php?app=classroom&mod=Teacher&act=getSelectTeacherOptions',{mhm_id:mhm_id},function(res){
+                    var res = getResponseData(res);
+                    var item = '<option value="0">全部</option>';
+                    $.each(res.data,function(i,v){
+                        item += '<option value="'+v.id+'">'+v.name+'</option>';
+                    });
+
+                    $("select[name='teacher_id']").html(item).show();
+                    $("select[name='teacher_id']").prev('span').hide();
+                });
+            });
+            var time = '2019-05-16';
+            // 折线
+            var courseSalesEcharts = echarts.init(document.getElementById('courseSales_chart'));
+            Echarts = echarts.init(document.getElementById('courseSales_chart'));
+            var school_title = '平台';
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: school_title+' - 课程销量统计'
+                },
+                legend: {
+                    data: ['点播课程', '直播课程', '班级课程', '线下课程']
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: JSON.parse('["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00"]')
+                },
+                yAxis: {
+                    type: 'value',
+                    minInterval: 1,
+                    axisLabel: {
+                        formatter: '{value}个'
+                    }
+                },
+                series: [{
+                    type: 'line',
+                    markPoint: {
+                        symbolSize: 40,
+                        data: [{
+                            type: 'max',
+                            name: '最高销量'
+                        }, {
+                            type: 'min',
+                            name: '最低销量'
+                        }]
+                    },
+                    smooth: true,
+                    name: '点播课程',
+                    stack: '点播课程',
+                    data: JSON.parse('["0","0","0","0","0","0","0","0","0","0","2"]'),
+                }, {
+                    type: 'line',
+                    markPoint: {
+                        symbolSize: 40,
+                        data: [{
+                            type: 'max',
+                            name: '最高销量'
+                        }, {
+                            type: 'min',
+                            name: '最低销量'
+                        }]
+                    },
+                    smooth: true,
+                    name: '直播课程',
+                    stack: '直播课程',
+                    data: JSON.parse('["0","0","0","1","0","0","0","0","0","0","0"]'),
+                }, {
+                    type: 'line',
+                    markPoint: {
+                        symbolSize: 40,
+                        data: [{
+                            type: 'max',
+                            name: '最高销量'
+                        }, {
+                            type: 'min',
+                            name: '最低销量'
+                        }]
+                    },
+                    smooth: true,
+                    name: '班级课程',
+                    stack: '班级课程',
+                    data: JSON.parse('["0","0","0","0","0","0","1","0","0","0","0"]'),
+                }, {
+                    type: 'line',
+                    markPoint: {
+                        symbolSize: 40,
+                        data: [{
+                            type: 'max',
+                            name: '最高销量'
+                        }, {
+                            type: 'min',
+                            name: '最低销量'
+                        }]
+                    },
+                    smooth: true,
+                    name: '线下课程',
+                    stack: '线下课程',
+                    data: JSON.parse('["0","0","2","0","1","0","2","0","0","0","0"]'),
+                }],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'line', //shadow
+                        lineStyle: {
+                            width: 2,
+                            type: 'dashed',
+                            color: '#66D7FF'
+                        }
+                    }
+                },
+                toolbox: {
+                    feature: {
+                        // dataZoom:{show:true},
+                        mark: {
+                            show: true
+                        },
+                        magicType: {
+                            type: ['line', 'bar']
+                        },
+                        restore: {},
+                        saveAsImage: {
+                            name: time + '课程销量统计'},
+                    }
+                },
+                grid: {
+                    show: true,
+                    containLabel: false
+                },
+                color:['#5458c9','#1d96e8',  '#d4237a','#2aa515', '#e0620d','#11c0b6',  '#594d9c', '#f4ba2a']
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            courseSalesEcharts.setOption(option);
+
+            //数据导出
+            $("#export").on('click', function(){
+                window.location.href = "../index.php?app=admin&mod=Home&act=export&tpl=course";
+            });
+
+        });
+    </script></div>
+<script type="text/javascript">
+    document.onkeydown=function (e) {
+        e=window.event||e;
+        var key = e.keyCode;
+        if ((e.ctrlKey && key == 82) || key == 116) {
+            parent.MainIframe.location.reload();
+            if(document.all) {
+                e.keyCode = 0;
+                e.returnValue = false;
+            }else {
+                e.cancelBubble = true;
+                e.preventDefault();
+            }
+        }
+    }
+    /**
+     * 初始化对象
+     */
+//表格样式
+    $(document).ready(function(){
+        admin.bindTrOn();});
+</script>
+</body>
+</html>
