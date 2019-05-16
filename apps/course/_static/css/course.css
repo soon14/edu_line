@@ -88,7 +88,7 @@ a{color:#999;outline:medium none;text-decoration:none}
 .classlist h3{display:-webkit-box;overflow:hidden;margin: 10px;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height: 16px;}
 .classlist h3 a{font-size:16px;color: #333;}
 .classlist h3 a:hover{color: #00BED4;}
-.classlist .name{text-align: right;width: 50%;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;float: right;color:#999;font-size: 14px;}
+.classlist .name{width: 50%;text-overflow: ellipsis;white-space: nowrap;overflow: hidden;float: right;color:#999;font-size: 14px;}
 .classlist .info{overflow:hidden;border-bottom:solid 1px #ededed; padding:0 10px 10px;}
 .classlist .name a{color:#9e9e9e}
 .classlist .price{float:left;color:#fe6d00;font-size:15px;font-weight: bold;}

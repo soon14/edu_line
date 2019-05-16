@@ -322,8 +322,7 @@
 <script>
     $(function () {
         $.ajax({
-            url:'',
-            type:'post',
+            url:'http://localhost:8080/test/queryUserName',
             success:function (data) {
                 if(data==""){
                     $("#userName").html("未登录");
