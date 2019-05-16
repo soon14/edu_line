@@ -392,11 +392,11 @@ var GET_PHONEVERIFY="http://try.51eduline.com/index.php?app=basic&mod=Passport&a
                         <ul class="teacher_list"  v-for="list in arrList">
                             <li>
                                 <div class="teacher_picture">
-                                    <a v-on:click="teacher(list.name,list.info,list.imga)"><img :src="list.imga" alt="测试机构1讲师1"></a>
+                                    <a v-on:click="teacher(list.name,list.workPosition,list.imga)"><img :src="list.imga" alt="测试机构1讲师1"></a>
                                 </div>
                                 <a v-on:click="javascript:teacher()"><p class="teacher_name">{{list.name}}</p></a>
                                 <a v-on:click="javascript:teacher()"><p class="shcool">测试机构1</p></a>
-                                <p class="introduce">{{list.info}}</p>
+                                <p class="introduce">{{list.workPosition}}</p>
                             </li>                                                    </ul>
                         <div class="page">
                             <div class="pagebox">  <a class='current'>1</a><a p='2' href='/index.php?app=classroom&mod=Teacher&act=index&p=2'>2</a><a p='2' href='/index.php?app=classroom&mod=Teacher&act=index&p=2' class='next'>下一页</a> </div>
@@ -626,9 +626,9 @@ var GET_PHONEVERIFY="http://try.51eduline.com/index.php?app=basic&mod=Passport&a
                         arrList:data.rows
                     },
                     methods:{
-                        teacher(namg,info,imga){
+                        teacher(namg,workPosition,imga){
                             sessionStorage.obj = JSON.stringify(namg);
-                            sessionStorage.obj2 = JSON.stringify(info);
+                            sessionStorage.obj2 = JSON.stringify(workPosition);
                             sessionStorage.obj3 = JSON.stringify(imga);
                             location.href="../teacher/1.html";
                         }

@@ -177,23 +177,10 @@
                 </div>
                 <p class="bd_right"></p>
                 <input type="text" id="search_combo_input" placeholder="搜索课程">
-                <i class="search_start icon icon-sousuo" id="btn_search_site"></i>
+                <a href="javascript:searchBtn()" v-on:click="searchBtn()"><i class="search_start icon icon-sousuo"></i></a>
             </div>
             <script>
                 $(function(){
-                    $('#btn_search_site').click(function(){
-                        var search_cate = $('#search_cate').val();
-                        var search_combo_input = $('#search_combo_input').val();
-                        if(search_combo_input != ''){
-                            if(search_cate == 'video'){
-                                window.open("../course.html"+"?search="+search_combo_input);
-                            }else if(search_cate == 'school'){
-                                window.open("../school.html"+"?search="+search_combo_input);
-                            }else if(search_cate == 'teacher'){
-                                window.open("../teacher.html"+"?search="+search_combo_input);
-                            }
-                        }
-                    });
 
                     $(".search_index_val").hover(function(){
                         $(".search_index").css("border-radius","4px 4px 4px 0px")
@@ -221,7 +208,7 @@
                 </div>
                 <ul class="page_header_adiv">
                     <li class="header_top_nav">
-                        <a href="../my/set_up/info.html">孤凡</a>
+                        <a href="../my/set_up/info.html"></a>
                         <i class="icon-nav-arrow"></i>
                     </li>
                     <dl class="login-after-position">
@@ -364,7 +351,7 @@
                             </div>
                             <h3>
                                 <a href="javascript:;" v-on:click="skipCou(list.id,list.name,list.count,list.image,list.teachername,list.courseorgname,list.price)">
-                                    <p>{{list.name}}</p>                                        </a>
+                                    <p v-html="list.name"></p>                                        </a>
                             </h3>
                             <div class="info">
                                 <div class="fr">{{list.count}}人在学习</div>
@@ -386,8 +373,28 @@
                     </ul>
                 </div>
 <script>
+    var aaa=null;
+    function searchBtn() {
+        var sea = $("#search_combo_input").val();
+        $.ajax({
+            url: 'http://localhost:8080/queryCourse',
+            type: 'post',
+            data: {
+                page: 1,
+                rows: 2,
+                status: "1",
+                name: sea
+            },
+            success: function (data) {
+                aaa.$data.course=data.rows;
+            }
+        })
+    }
 
     $(function () {
+        queryCourse();
+    })
+        function queryCourse(){
         $.ajax({
             url:'http://localhost:8080/queryCourse',
             type:'post',
@@ -397,7 +404,7 @@
                 status:"1"
             },
             success:function (data) {
-                new Vue({
+                aaa=new Vue({
                     el:"#courseList",
                     data:{
                         course:data.rows
@@ -417,7 +424,8 @@
                 })
             }
         })
-    })
+    }
+
 </script>
                 <div class="page">
                     <div class="pagebox">

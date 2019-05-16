@@ -348,15 +348,15 @@
                         <ul class="select-list pb20">
                             <li class="selected"><a href="../school.html"   id="cate0" >全部</a></li>
                             <li class="" >
-                                <a href="javascript:initQuerySchool(1);"   data-type="cateId" >教育培训</a>
+                                <a href="javascript:seacherType(1);"   data-type="cateId" >教育培训</a>
                             </li><li class="" >
-                            <a href="javascript:initQuerySchool(4);"  data-type="cateId"  >IT机构</a>
+                            <a href="javascript:seacherType(4);"  data-type="cateId"  >IT机构</a>
                         </li><li class="" >
-                            <a href="javascript:initQuerySchool(10);"  data-type="cateId" >设计院</a>
+                            <a href="javascript:seacherType(10);"  data-type="cateId" >设计院</a>
                         </li><li class="" >
-                            <a href="javascript:initQuerySchool(11);"  data-type="cateId" >建设单位</a>
+                            <a href="javascript:seacherType(11);"  data-type="cateId" >建设单位</a>
                         </li><li class="" >
-                            <a href="javascript:initQuerySchool(12);"  data-type="cateId"  >施工单位</a>
+                            <a href="javascript:seacherType(12);"  data-type="cateId"  >施工单位</a>
                         </li>                        </ul>
                         <div class="subs" style="display: none" style="max-width:100%;background:white;margin:0">
                             <ul class="sub-course" id="pre">
@@ -649,7 +649,24 @@
     $(function () {
         initQuerySchool();
     })
+    var cardVue=null;
 
+    function seacherType(typeId) {
+        $.ajax({
+            url:'http://localhost:8080/querySchool',
+            type:'post',
+            data:{
+                page:1,
+                rows:8,
+                type:typeId
+            },
+            success:function (data) {
+                //  alert(data[0].id)
+                cardVue.$data.arrList=data.rows
+            }
+
+        })
+    }
     function  initQuerySchool(typeId){
         //alert(typeId)
     $.ajax({
