@@ -1,0 +1,1404 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>java从入门到放弃— Eduline</title>
+    <meta content="Eduline多机构在线教育交易平台" name="keywords">
+    <meta content="Eduline多机构在线教育交易平台" name="description">
+    <meta name="viewport" charset="UTF-8" content="user-scalable=no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+
+    <link rel="shortcut icon" href="http://try.51eduline.com/data/upload/2018/0808/14/5b6a91bca0b3b.ico" type="image/x-icon">
+
+    <!-- 站点css -->
+    <!--<link href="http://try.51eduline.com/addons/theme/stv1/_static/css/css.php?t=css&f=common_new.css,basic_new.css,common.css,index.css,logincss.css,media.css,style.css,style_add.css,style_new.css,wenda.css,_header_footer.css&v=20180814.css" rel="stylesheet" type="text/css" />-->
+    <link rel="stylesheet" type="text/css" href="http://try.51eduline.com/addons/theme/stv1/_static/css/rest.css?v=20180814">
+    <link rel="stylesheet" type="text/css" href="http://try.51eduline.com/addons/theme/stv1/_static/icon/iconfont.css?v=20180814">
+    <link rel="stylesheet" type="text/css" href="http://try.51eduline.com/addons/theme/stv1/_static/css/common.css?v=20180814">
+    <link rel="stylesheet" type="text/css" href="http://try.51eduline.com/addons/theme/stv1/_static/css/index.css?v=20180814">
+    <link rel="stylesheet" type="text/css" href="http://try.51eduline.com/addons/theme/stv1/_static/css/style.css?v=20180814">
+    <link rel="stylesheet" type="text/css" href="http://try.51eduline.com/addons/theme/stv1/_static/js/tbox/box.css?v=20180814">
+    <style>
+        @font-face {font-family: 'iconfontNEW';src: url('http://try.51eduline.com/addons/theme/stv1/_static/icon/iconfontNEW.woff?v={$site.sys_version}');}
+        .iconfontNEW{font-family: iconfontNEW;}
+    </style>
+    <!--<script src="http://try.51eduline.com/addons/theme/stv1/_static/js/js.php?t=js&f=jquery.form.js,common.js,core.js,module.js,module.common.js,jwidget_1.0.0.js,jquery.atwho.js,jquery.caret.js,ui.core.js,ui.draggable.js,plugins/core.comment.js,plugins/core.digg.js&v=20180814.js"></script>-->
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery.atwho.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery.caret.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/core.js?v=20180814"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/module.js?v=20180814"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/module.common.js?v=20180814"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/common.js?v=20180814"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/script.js?v=20180814"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/user.js?v=20180814"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/plugins/core.comment.js?v=20180814"></script>
+
+    <script>
+        //全局变量
+        var SITE_URL  = 'http://try.51eduline.com';
+        var UPLOAD_URL= 'http://try.51eduline.com/data/upload';
+        var THEME_URL = 'http://try.51eduline.com/addons/theme/stv1/_static';
+        var APPNAME   = 'live';
+        var MID		  = '0';
+        var UID		  = '0';
+        var initNums  =  '140';
+        var SYS_VERSION = '20180814';
+        var _ROOT_    = 'http://try.51eduline.com';
+
+        //注册登录模板
+        var REG_LOGIN="http://try.51eduline.com/index.php?app=basic&mod=Passport&act=regLogin";
+        //邮箱验证地址
+        var CLICK_EMIL="http://try.51eduline.com/index.php?app=basic&mod=Passport&act=clickEmail";
+        //异步注册地址
+        var REG_ADDRESS="http://try.51eduline.com/index.php?app=basic&mod=Passport&act=ajaxReg";
+        //异步登录
+        var LOGIN_ADDRESS="http://try.51eduline.com/index.php?app=basic&mod=Passport&act=ajaxLogin";
+        //退出登录
+        var LOGINOUT_ADDRESS="http://try.51eduline.com/index.php?app=basic&mod=Passport&act=logout";
+        //手机号正则
+        var PHONE_MATCH = /^1[3|4|5|6|7|8|9][0-9]\d{8}$/;
+        //邮箱正则
+        var EMAIL_MATCH = /([\w\-\.]+\@[\w\-\.]+\.[\w\-\.]+)/;
+
+        $(function(){
+            $('.backtop').click(function(){
+                $('body,html').animate({scrollTop:0},300);
+                return false;
+            });
+            $('.full-course').hover(function(){
+                $(this).addClass('hover');
+            },function(){
+                $(this).removeClass('hover');
+            });
+
+            $(".search_index_val span a").click(function(){
+                var span_Val = $(this).text();
+                var a_Attr = $(this).attr("attr");
+                $(".search_index_val p").html(span_Val);
+                $("#search_cate").val(a_Attr);
+                $(".search_index #search_combo_input").attr("placeholder","搜索"+span_Val);
+                $(this).hide().siblings().show();
+            })
+
+            $(".search_index input").focus(function(){
+                $(".search_index").css("width","250px");
+                $(".search_index input").css("width","140px");
+            })
+
+        });
+
+        $(window).scroll(function(){
+            if($(window).scrollTop()>300){
+                $('.backtop').fadeIn(300);
+            }else{
+                $('.backtop').fadeOut(200);
+            }
+        });
+
+        if(navigator.userAgent.match(/(iPhone|Android|ios)/i)) {
+            $(window).load(function () {
+                $('.modular,.logos,.window-box').show();
+                $('.users').attr('style','display:block');
+            });
+        }
+
+        function closeMsg(obj){
+            $(".news-msg").remove();
+        }
+    </script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/ui.layer.js"></script>
+
+    <!-- 站点js -->
+    <!--[if lt IE 9]>
+    <script src="http://try.51eduline.com/addons/theme/stv1/_static/js/lazyload/html5shiv.js"></script>
+    <![endif]-->
+    <!--[if lt IE 9]><script src="js/html5.js" type="text/javascript"></script><![endif]-->
+
+</head>
+<body>
+
+
+<link rel="stylesheet" type="text/css" href="http://try.51eduline.com/addons/theme/stv1/_static/css/reg_login.css?v=20180814">
+
+<div id="transparent" style="display: none;">
+
+    <div id="loging-worap-regsiter"><a class="loging-Cancel" href="javascript:;" onclick="removeReg()">×</a>
+        <!--登录-->
+        <div id="loging-worap">
+            <div class="title">登录</div>
+            <div class="loging" style="padding:0 20px;margin:0;width:auto;border:0">
+                <ul>
+                    <li class="her-login">
+                        <div class="input-box">
+                            <i class="icon-zhanghao"></i>
+                            <input name="log_username" id="log_username" class="regsiter-width" maxlength="30" type="text" placeholder="请输入用户名/手机号/邮箱">
+                            <em>×</em>
+                        </div>
+                    </li>
+                    <li class="her-login">
+                        <div class="input-box">
+                            <i class="icon-mima"></i>
+                            <input name="log_pwd" id="log_pwd" class="regsiter-width" maxlength="30" type="password" placeholder="请输入登录密码">
+                            <em>×</em>
+                        </div>
+                    </li>
+                    <li class="her-login">
+                        <input name="" id="logSub" onclick="logSub()" class="loging-xy-submit" type="submit" value="登录"/>
+                    </li>
+                </ul>
+                <div class="loging-xy">
+                    <div class="loging-bottom">
+                        <div class="third-party"><dl><dd><a href="http://try.51eduline.com/login_callback/qzone/Login/login_sync_other.html" class="icon-qzone"></a></dd><dd><a href="http://try.51eduline.com/login_callback/weixin/Login/login_sync_other.html" class="icon-weixin"></a></dd><dd><a href="http://try.51eduline.com/login_callback/sina/Login/login_sync_other.html" class="icon-sina"></a></dd></dl></div>                        <div class="loging-xy-bottom">
+                        <a class="goto_res" href="http://try.51eduline.com/register.html">注册账号</a>                            <a href="http://try.51eduline.com/repwd.html" sty>忘记密码？</a></div>
+                        <style>
+                            #transparent a{color: #00BED4;}
+                            .icon-qzone {
+                                background-position: -461px -661px;
+                                background-image:url(http://try.51eduline.com/addons/theme/stv1/_static/icon/icon.png);
+                            }
+                            .icon-weixin {
+                                background-position: -511px -661px;
+                                background-image:url(http://try.51eduline.com/addons/theme/stv1/_static/icon/icon.png);
+                            }
+                            .icon-sina {
+                                background-position: -561px -661px;
+                                background-image:url(http://try.51eduline.com/addons/theme/stv1/_static/icon/icon.png);
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loging-back"></div>
+</div>
+
+<script>
+    $(document).keydown(function (event) {
+        if ($("#transparent").css("display") == "block") {
+            if (event.keyCode == 13) {
+                logSub();
+            }
+        }
+    });
+    /**
+     * 取消注册
+     */
+    function removeReg() {
+        $("#transparent").css("display", "none");
+    }
+
+    $('.loging li .input-box em').on("click",function(){
+        $(this).siblings(".regsiter-width").val("").focus();
+    });
+
+    $(".loging li .input-box .regsiter-width").blur(function(){
+        $(this).parent(".loging li .input-box").css({"box-shadow":"0px 0px 0 0 rgba(255,255,255,1)","border": "1px solid #eeeeee"})
+    });
+
+    $(".loging li .input-box .regsiter-width").focus(function(){
+        $(this).parent(".loging li .input-box").css({"box-shadow":"0px 0px 1px 1px rgba(0,190,212,1)","border": "1px solid transparent"})
+    });
+</script>
+<div class="win hide"></div>
+
+<div class="top">
+    <div class="header_new2">
+        <div class="top1">
+            <div class="top1img">
+                <a href="/" title="Eduline在线教育系统"><img src="http://try.51eduline.com/data/upload/2018/12/045c065a09b4e79.png" width="150"/></a>
+            </div>
+
+            <div class="nav">
+                <ul>
+                    <li >
+                        <a href="http://try.51eduline.com" target="_self">首页</a>
+                    </li>                        <li >
+                    <a href="javascript:;" target="_self">课程</a>
+                    <span class="course-class">
+                            <a href="http://try.51eduline.com/course.html?vtype=1" target="_self">点播</a><a href="http://try.51eduline.com/course.html?vtype=2" target="_self">直播</a><a href="http://try.51eduline.com/album.html" target="_self">班级</a><a href="http://try.51eduline.com/lineclass.html" target="_self">线下</a>                            </span>                        </li>                        <li >
+                    <a href="http://try.51eduline.com/exam.html" target="_self">考试</a>
+                </li>                        <li >
+                    <a href="http://try.51eduline.com/school.html" target="_self">机构</a>
+                </li>                        <li >
+                    <a href="http://try.51eduline.com/teacher.html" target="_self">名师</a>
+                </li>                        <li >
+                    <a href="http://try.51eduline.com/vip.html" target="_self">会员</a>
+                </li>                        <li >
+                    <a href="javascript:;" target="_self">更多</a>
+                    <span class="course-class">
+                            <a href="http://try.51eduline.com/mall.html" target="_self">商城</a><a href="http://try.51eduline.com/card_receipt/coupon.html" target="_self">卡券</a><a href="http://try.51eduline.com/news.html" target="_self">资讯</a><a href="http://try.51eduline.com/question.html" target="_self">问答</a><a href="http://try.51eduline.com/library.html" target="_self">资料</a>                            </span>                        </li>                </ul>
+            </div>
+        </div>
+
+        <div class="top3">
+            <!--消息提示-->
+            <ul class="news-msg" style="display:none;">
+                <a class="shanchu-ico" href="javascript:;" onClick="closeMsg(this)">×</a>
+
+
+
+            </ul>
+
+            <div class="search_index">
+                <div class="search_index_val">
+                    <div>
+                        <p>课程</p><i></i>
+                    </div>
+                    <span>
+                        <a href="javascript:void(0)" attr="course">课程</a>
+                        <a href="javascript:void(0)" attr="school">机构</a>                        <a href="javascript:void(0)" attr="teacher">讲师</a>
+                    </span>
+                    <input value="video" id="search_cate" type="hidden" disabled />
+                </div>
+                <p class="bd_right"></p>
+                <input type="text" id="search_combo_input" placeholder="搜索课程">
+                <i class="search_start icon icon-sousuo" id="btn_search_site"></i>
+            </div>
+            <script>
+                $(function(){
+                    $('#btn_search_site').click(function(){
+                        var search_cate = $('#search_cate').val();
+                        var search_combo_input = $('#search_combo_input').val();
+                        if(search_combo_input != ''){
+                            if(search_cate == 'video'){
+                                window.open("http://try.51eduline.com/course.html"+"?search="+search_combo_input);
+                            }else if(search_cate == 'school'){
+                                window.open("http://try.51eduline.com/school.html"+"?search="+search_combo_input);
+                            }else if(search_cate == 'teacher'){
+                                window.open("http://try.51eduline.com/teacher.html"+"?search="+search_combo_input);
+                            }
+                        }
+                    });
+
+                    $(".search_index_val").hover(function(){
+                        $(".search_index").css("border-radius","4px 4px 4px 0px")
+                    },function(){
+                        $(".search_index").css("border-radius","4px 4px 4px 4px")
+                    })
+                })
+                function closeMsg(){
+                    $(".news-msg").remove();
+                }
+            </script>
+            <div class="nav1">
+                <div class="look_scanning">
+                    <i></i>
+                    <div class="ewm">
+                        <div class="h5">
+                            <div id="nav_h5_qrcode"><img style="display: block;" width="86" height="86" src="http://try.51eduline.com/index.php?app=basic&mod=Qrcode&act=index&config[content]=http%3A%2F%2Ftry.51eduline.com&config[print]=1" data-bd-imgshare-binded="1"></div>
+                            <p>手机网页端</p>
+                        </div>
+                        <div class="app">
+                            <div id="nav_app_qrcode"><img src="http://try.51eduline.com/index.php?app=basic&mod=Qrcode&act=index&config[content]=https%3A%2F%2Fwww.pgyer.com%2F5RDd%3Fversion%3D4.1&config[print]=1" data-bd-imgshare-binded="1"></div>
+                            <p>APP下载</p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="page_header_adiv">
+                    <li><a href="javascript:;" onclick="reg_login();">登录</a></li>
+                    <li style="line-height: 80px;">丨</li>
+                    <li>
+                        <a href="http://try.51eduline.com/register.html">注册</a>                        </li>                </ul>
+            </div>
+
+            <div class="nav2">
+                <a class="page_header_adiv" href="http://try.51eduline.com/login.html">机构入驻</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if($(".ewm").children().length>1){
+        $(".ewm").width(203)
+    }else{
+        $(".ewm").width(93)
+    }
+</script>
+
+<link rel="stylesheet" href="http://try.51eduline.com/apps/live/_static/css/live_view.css">
+<script src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery.SuperSlide.2.1.1.js" charset="utf-8"></script>
+<div class="mask"></div>
+<!--content start-->
+<div class="topbox bgf7">
+    <div class="wrap">
+        <div class="livetopbox">
+            <div class="left">
+                <img src="http://try.51eduline.com/data/upload/2019/03/295c9de7711d633_580_320_580_320.jpg" alt="" class="style-btn">
+
+                <form action="http://try.51eduline.com/pay/[vst].html" method="POST" target="_blank" id="pay_form1">
+                    <input type="hidden" value="154" name="vid" />
+                    <input type="hidden" value="zy_live" name="check_type" />
+                    <input type="hidden" value="直播：java从入门到放弃" name="title" />
+                    <input type="hidden" id="money1" value="0" name="money" />
+                </form>
+                <a href="javascript:;" class="sign" id="charge_video01"><!-- 报名13人<em>|</em> --><b><i class="icon-01"></i>进入直播</b>
+                </a>
+                <!-- <div class="tip">
+    服务承诺：<em>资</em><span>资金安全</span>
+</div> -->
+            </div>
+            <div class="right">
+                <div class="head_box">
+                    <h3>java从入门到放弃</h3>
+                    <!--<a href="javascript:;" class="money">打赏</a>-->
+                </div>
+                <div class="livetopitem" style="border-bottom: 1px solid #eee;padding-bottom: 14px;">
+                    <strong><i class="icon-01"></i>已报名<span>113</span></strong>
+                    <strong><i class="icon-02"></i>课时数<span>0</span></strong>
+                    <strong><i class="icon-03"></i>浏览量<span>293</span></strong>
+                </div>
+                <div class="livetopitem txt-style">
+                    <div class="f1" style="float: left;">主讲人：</div><div class="fl">测试机构1讲师1</div>
+                </div>
+                <div class="livetopitem txt-style">
+                    <div class="fl">有效期：</div>
+                    <div class="fl">自购买之日起<span>500日有效</span></div>
+                </div>
+                <!--
+                <div class="livetopitem txt-style">
+                    <div class="fl">周期：</div>
+                    <div class="f1">
+                        2019-03-05开课-2021-03-15结课
+                    </div>
+                </div>
+                -->
+                <div class="price">
+                    <div class="new_price"><span  style="color: #56b02a;">免费</span></div>                     <div class="old_price">原价：<span>¥2000</span></div>
+                    <!-- 新功能添加数据，王刚做过 -->
+                    <!--  -->
+                </div>
+                <div class="livetopitem btn" style="padding: 0">
+                    <form action="http://try.51eduline.com/pay/[vst].html" method="POST" target="_blank" id="pay_form">
+                        <input type="hidden" value="154" name="vid" />
+                        <input type="hidden" value="zy_live" name="check_type" />
+                        <input type="hidden" value="直播：java从入门到放弃" name="title" />
+                        <input type="hidden" id="money" value="0" name="money" />
+                    </form>
+                    <a href="javascript:;" class="sign" id="charge_video"><!-- 报名13人<em>|</em> -->立即报名</a>
+                    <div class="live-date-count-down-box">
+
+                    </div>
+
+                    <!--<a href="#" class="join">加入我的直播课</a>-->
+                    <!-- <div class="zx">
+                        <p>免费咨询</p>
+                        <p>400-820-8829</p>
+                    </div> -->
+                </div>
+                <div class="livetopitem info">
+                    <div class="fr ewm1" style="float: right;">
+                        <i class="icon-07"></i>手机查看
+                        <div class="qrcode-wrap">
+                            <span></span>
+                            <div id="qrcode" class="fxp">
+                                <img src="http://try.51eduline.com/index.php?app=basic&mod=Qrcode&act=index&config[margin]=0&config[content]=http%3A%2F%2Ftry.51eduline.com%2Flive%2F154.html&config[print]=1" alt="qrcode" />                            </div>
+                        </div>
+                    </div>
+                    <a href="javascript:;" onClick="collectVideo(this,154,1)" class="f1"><i class="icon icon-shoucang1"></i>收藏</a>
+                    <div class="f1 zhuang-left" style="position: relative;" ><a href="javascript:;"  style="position: relative;"><i class="icon icon-fenxiang1"></i>分享</a>
+                        <div class="_share_my_firends" >
+                            <div class="_share_all_channel">
+                                <i class="side-ills-fell"></i>
+                                <p  style="padding-top: 4px; text-indent: 10px;">分享到：</p>
+                                <div class="bdsharebuttonbox"  data-tag="share_1">
+                                    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博" style="margin: 6px 6px 6px 7px;"></a>
+                                    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"  style="margin: 6px 6px 6px 7px;"></a>
+                                    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="margin: 6px 6px 6px 7px;"></a>
+                                    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"  style="margin: 6px 6px 6px 7px;"></a>
+                                </div>
+                                <script>
+                                    var share_url = "http://try.51eduline.com/live/154.html";
+                                    window._bd_share_config={"common":{
+                                            bdUrl:share_url,
+                                            bdText:"",
+                                            bdMini:"2",
+                                            bdMiniList:["tsina","weixin","qzone","sqq","renren","copy"],
+                                            bdPic:"",
+                                            bdSize:"24"},
+                                        share:{},
+                                        image:{"viewList":["tsina","weixin","qzone","sqq"],
+                                            viewText:"分享到：","viewSize":"0"}};
+                                    with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://try.51eduline.com/addons/theme/stv1/_static/js/baiduShare/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="content pt20 bgf7">
+    <div class="wrap">
+        <div class="livemain">
+            <div class="livemain-hd" id="view_main_nav">
+                <ul id="view_main_ul">
+                    <li class="on"><a href="javascript:;" onclick="switchnav(this,'dagang')">直播课表</a></li>
+                    <li><a href="javascript:;" onclick="switchnav(this,'xiangqing')">课程简介</a></li>
+                    <li><a href="javascript:;" onclick="switchnav(this,'pingjia')">课程评价</a></li>
+                </ul>
+            </div>
+            <div class="livemain-bd">
+                <div class="livemain_con">
+                    <div class="livemain_item teachoutline" id="dagang">
+                        <div class="view_catalog_all" style="cursor: inherit;margin: 0;font-size: 16px;">暂时没有直播课表。。</div>                    </div>
+
+                    <div class="livemain_item coursedetail" id="xiangqing">
+                        <div class="title">课程简介</div>
+                        <div class="details">
+                            <p>见证了入门学习的一个过程<br/></p>                        </div>
+                    </div>
+
+                    <div class="livemain_item course-comment" id="pingjia">
+                        <div class="title">课程评价</div>
+                        <ul class="course-tab-nav">
+                            <li class="active"><a href ="javascript:;" class="navClick" type="all">全部评价（0）</a></li>
+                            <li><a href ="javascript:;" class="navClick"  type="good">好评（0）</a></li>
+                            <li><a href ="javascript:;" class="navClick"  type="middle">中评（0）</a></li>
+                            <li><a href ="javascript:;" class="navClick"  type="bad">差评（0）</a></li>
+                        </ul>
+                        <div class="details">
+                            <div class="indo-mess"></div>
+                            <style media="screen">
+                                .course-comment .details{padding:0 20px;}
+                                .course-comment .item{position:relative;margin-top:14px;border-bottom:1px solid #e6e6e6;}
+                                .course-comment .item dl{float:left;margin-right:18px;text-align:center;}
+                                .star{color:#888;}
+                                .star small{font-size:36px;color:#ff9000;margin-right: 10px;}
+                                .big .star{margin:0 20px;color:#666768;font-size:16px;}
+                                .star span{display:inline-block;margin:-10px 2px 0;width:16px;height:16px;background-position:-107px -218px;vertical-align:middle;}
+                                .star span.no{background-position:-127px -218px;}
+                                .big .star span{margin:-2px 2px 0;width:25px;height:23px;background-position:-13px -214px;}
+                                .big .star span.no{background-position:-63px -214px;}
+                                .big{overflow:hidden;margin:20px 0 0; font-size:14px;/* border-bottom: 1px solid #eee; */}
+                                .big div{float:left;}
+                                .livemain{float:left;width:880px;}
+                                .liveside{float:right;width:280px;}
+                                .livemain-hd{height:60px;background-color:#fff;line-height:60px;}
+                                .livemain-hd ul{overflow: hidden;margin:0 15px;border-bottom: 1px solid #edf2f2;}
+                                .livemain-hd li{float:left;width:100px;height:56px;text-align:center;font-size:18px;margin-right: 60px;}
+                                .livemain-hd li a{display:block;color:#666;}
+                                .livemain-hd li:hover{border-bottom: 2px solid #00BED4;}
+                                .livemain-hd li.on{border-bottom: 2px solid #00BED4;}
+                                .livemain-hd li a:hover,.livemain-hd li.on a{color:#00BED4;}
+                                .livemain_item{padding:30px 20px 20px 20px;background-color:#fff;-webkit-box-shadow:0 1px 1px #d5d5d5;-moz-box-shadow:0 1px 1px #d5d5d5;box-shadow:0 1px 1px #d5d5d5;}
+                                .livemain_item .title{margin-bottom:20px;color:#333;text-align:center;font-size:20px;line-height:24px;}
+                                .livemain_item .title a{font-size: 12px}
+                                .icon-yazan{float:none!important;}
+                                .back a.edit {margin-right: 60px;font-size: 15px;line-height: 50px;}
+                                .back .icon-note{margin-right: 3px;width: 29px;height: 22px;background-position: -108px -513px;}
+                                .back .icon-pl{width: 29px;height: 22px;background-position: -61px -514px;margin-left: 10px;}
+                                .back .icon-zan{width: 29px;height: 22px;background-position: -11px -514px;margin-left: 10px;}
+                                .classmain_con{margin-top: 20px;}
+                                .teacher-dp{overflow:hidden;padding-left:50px;min-height:85px;font-size:14px;line-height:24px;margin-bottom: 20px;}
+                                .teacher-dp dt{position:absolute;overflow:hidden;margin-left:-48px;width:75px;}
+                                .teacher-dp .pic{overflow:hidden;width:40px;height:40px;border-radius:50%;}
+                                .teacher-dp .name a{color:#333;line-height: 14px;}
+                                .teacher-dp dd{padding-bottom:20px;}
+                                .teacher-dp dd .tit{overflow:hidden;margin: 2px 0 8px;line-height: 14px;}
+                                .teacher-dp dd .tit .name{float: left;margin-right: 10px;}
+                                .teacher-dp dd .star{float:left;margin:2px 20px 0 0;}
+                                .teacher-dp dd .txt{color:#656565;}
+                                .teacher-dp dd .replymegfooter{width: 96%;margin-top: 8px;}
+                                .wenda-listcon {margin: 0 0 20px;overflow: hidden; width:100%;border-bottom: solid 1px #ebebeb;}
+                                .wenda-time,.keyword-list{float:left;color: #888}
+                                .qa-comment-addon-r { float: right; }
+                                .qa-total-reply {  margin-right: 10px;  cursor: pointer;}
+                                .qa-total-reply {  margin-right: 10px;  cursor: pointer;}
+                                .video-review .clearfix{;padding: 10px 0 0 0; height:auto;position: relative;}
+                                .qa-total-reply .icon-pinglun3{color: #666;margin-right: 4px;font-size: 14px;}
+                                .qa-total-reply .icon-dianzan2{color: #666;margin-right: 4px;font-size: 14px;margin-left: 10px;}
+                                .classmain_con .txt{padding: 0 109px 0 0;position: relative; overflow: hidden;}
+                                .classmain_con .txt i{position: absolute;
+                                    top: 0;
+                                    display: none;
+                                    right: 31px;}
+                                .classmain_con .txt i:hover{
+                                    cursor: pointer;
+                                }
+                            </style>
+                            <!-- 点评开始 -->
+                            <div class="title back">
+
+                                <a type="review" href="javascript:;" class="fr edit"><i class="icon-note"></i>写点评</a></div>
+                            <div  class="video-review back">
+                                <!--点评 默认隐藏-->
+                                <div id="review-comments" style="display:none" class="clearfix">
+                                    <div class="qa-ci-wrap">
+                                        <form id="review_form" onsubmit="return false;">
+                                            <div class="reply-star clearfix">
+                                                <label class="form-label  fl f3" for="score">评分：</label>
+                                                <ul id="star_ul" class="star_ul fl">
+                                                    <li class="grade-back-default"></li>
+                                                    <li class="grade-back-default"></li>
+                                                    <li class="grade-back-default"></li>
+                                                    <li class="grade-back-default"></li>
+                                                    <li class="grade-back-default"></li>
+                                                </ul>
+                                                <span class="color_hui" id="how-score"></span>
+                                                <p class="fl font12 f9">&nbsp;（请根据课程质量打分）</p>
+                                            </div>
+                                            <input type="hidden" name="score"  id="course_score"/>
+                                            <textarea id="review_con" class="qa-ci-iarea js-reply-ipt-default" placeholder="点评内容可以是你对该课程质量和难度的感受、学习建议等。"></textarea>
+                                            <div class="qa-reply-footright fr"> <span class="qa-tips"></span>
+                                                <button type="review" class="btn-mc-light js-ipt-cancel">取消</button>
+                                                <button onclick="doDianpin()" class="btn-mc btn-mini btn-mc-green">确认</button>                </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--点评循环-->
+                            </div>
+
+                            <script type="text/javascript">
+                                var review_kztype = '1';//数据分类 1:课程;2:班级3;线下课;
+                                var review_kzid   = '154';//课程或者班级ID
+                                var review_type   = '2';//分类类型 1:提问,2:点评,3:笔记
+                                var review_page   = 0;       //当前分页
+                                var review_uid    = '0';
+                                var review_limit  = 10;
+                                var id = '0';
+                                var type = '课程';
+                                startype = 'all';
+
+                                //点赞
+                                function zan(){
+                                    var zan_this = $(this);
+                                    var kzid = $(this).attr('kzid');
+                                    $.post("http://try.51eduline.com/index.php?app=classroom&mod=Public&act=doreviewvote",{kztype:5,kzid:kzid,type:0},function(data){
+                                        if(data.status==0){
+                                            ui.error(data.info);
+                                        }else {
+                                            success(data.info, {
+                                                time: 2000,
+                                            });
+                                        }
+                                        $(zan_this).addClass('zan');
+                                        $(zan_this).removeClass('qa-icon');
+                                    },'json');
+                                };
+                                //取消点赞
+                                function quxiao(){
+                                    var zan_this = $(this);
+                                    var kzid = $(this).attr('kzid');
+                                    $.post("http://try.51eduline.com/index.php?app=classroom&mod=Public&act=doreviewvote",{kztype:5,kzid:kzid,type:1},function(data){
+                                        if(data.status==0){
+                                            ui.error(data.info);
+                                            return false;
+                                        }else {
+                                            ui.success(data.info);
+                                        }
+                                        $(zan_this).addClass('qa-icon');
+                                        $(zan_this).removeClass('zan');
+                                    });
+                                };
+                                $(function(){
+                                    getReview(review_page);
+                                    //星星评分
+                                    score('star_ul');
+
+                                    //分页操作
+                                    $('.video-review').on('click','.reviewPage a',function(){
+                                        var p = $(this).attr('p');
+                                        if(typeof(p) == 'undefined') return false;
+                                        getReview(p);
+                                        return false;
+                                    });
+                                });
+
+                                //写点评
+                                function doDianpin(){
+
+                                    if(review_uid <=0){
+                                        reg_login();
+                                        return false;
+                                    }
+                                    var score = $('#course_score').val();
+
+                                    if(score == 0){
+                                        if(review_kztype == 1){
+                                            type = '课程';
+                                        }else if(review_kztype == 2){
+                                            type = '班级';
+                                        }else if(review_kztype == 3){
+                                            type = '线下课';
+                                        }
+                                        ui.error('请给'+type+'打分!');
+                                        return false;
+                                    }
+                                    var content = $('#review_con').val();
+                                    content = content.replace(/&nbsp;/ig, "");
+                                    content = content.replace(/[ ]/g,"");//去除空格
+                                    content = content.replace(/<[^>].*?>/g,"");//去html标签
+                                    if(content == ""){
+                                        ui.error('请输入评价内容!');
+                                        return false;
+                                    }
+                                    for(var i=0; i<arr.length; i++)
+                                    {
+                                        if(content.indexOf(arr[i])>-1)
+                                        {
+                                            ui.error('评价内容不得包含敏感词!');
+                                            return false;
+                                        }
+                                    }
+                                    ajaxPinjia(score,content);
+                                    setTimeout( inewxn(),300)
+                                }
+                                //提交点评
+                                function ajaxPinjia(score,content){
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url:U('classroom/Review/add'),
+                                        data: "score="+score+'&content='+content+'&id='+review_kzid+'&kztype='+review_kztype,
+                                        async:false,
+                                        dataType:"JSON",
+                                        success: function(data){
+                                            if(data.status == 1){
+                                                //$('#course_score').val('0');
+                                                $('#review_form')[0].reset();
+                                                $('#review-comments').hide();
+                                                $("#dpmsg").remove();
+                                                getReview(1);
+                                            }else{
+                                                ui.error(data.info);
+                                            }
+                                        },
+                                        error:function(xhr){
+                                            ui.error(xhr.info);
+                                        }
+                                    });
+
+                                }
+                                $(".classmain_con").on("click",".txt i",function () {
+                                    if($(this).html()=="展开"){
+                                        $(this).parent().css("height","auto");
+                                        $(this).html("收起")
+
+                                    }else{
+                                        $(this).parent().css("height","24px");
+                                        $(this).html("展开")
+                                    }
+                                });
+                                //获取点评
+                                function getReview(page){
+                                    var url = "http://try.51eduline.com/index.php?app=widget&mod=Resource&act=getList";
+                                    var html = '';
+                                    var html_list = '';
+                                    $.post(url,{limit:review_limit,kztype:review_kztype,kzid:review_kzid,type:review_type,p:page,startype:startype},function(data){
+                                        if(data.data==""){
+                                            if($('#dpmsg').text() == "暂时没有点评，快来坐沙发！"){
+                                            }
+                                            else {
+                                                html += '<span id="dpmsg">暂时没有点评，快来坐沙发！</span>';
+                                            }
+                                        }else{
+                                            $('#dpmsg').hide();
+                                            $.ajax({
+                                                type: "POST",
+                                                url:"http://try.51eduline.com/index.php?app=live&mod=Index&act=reviewNum",
+                                                data:"review_kzid="+review_kzid,
+                                                dataType:"json",
+                                                success:function(html){
+                                                    //$('.course-tab-nav').html(html);
+                                                }
+                                            });
+                                            html_list += '<div class="big">';
+                                            html_list += '<div>综合评分</div>';
+                                            html_list += ' <div>（'+data.count+'人）</div>';
+                                            html_list += '</div>';
+                                            html_list += ' <div class="star"><small>'+data.total_star+'.0</small><span class="'+(data.total_star>=1?'':'no')+'"></span><span class="'+(data.total_star>=2?'':'no')+'"></span><span class="'+(data.total_star>=3?'':'no')+'"></span><span class="'+(data.total_star>=4?'':'no')+'"></span><span class="'+(data.total_star>=5?'':'no')+'"></span></div>';
+
+                                            $.each(data.data,function(i,k){
+                                                html += '<div class="review_con wenda-listcon clearfix">';
+                                                html += '  <div class="classmain_con">';
+
+                                                html += '<dl class="teacher-dp">';
+                                                html += ' <dt>';
+                                                html += ' <div class="pic"><a href="'+k.user_src+'"><img src="'+k.userface+'" class="lazyloading"></a></div>';
+                                                html += ' </dt>';
+                                                html += '<dd>';
+                                                html += '<div class="tit"><div class="name"><a href="'+k.user_src+'">'+k.username+'</a></div><div class="star"><span class="'+(k.star>=1?'':'no')+'"></span><span class="'+(k.star>=2?'':'no')+'"></span><span class="'+(k.star>=3?'':'no')+'"></span><span class="'+(k.star>=4?'':'no')+'"></span><span class="'+(k.star>=5?'':'no')+'"></span></div><!--专业水平：5分授课技巧：5分教学态度：5分--></div>';
+                                                html += '<div class="txt">'+k.review_description+'<i>展开</i></div>';
+                                                html += '<div class="replymegfooter">';
+
+                                                html += '<div class="replymegfooter">';
+                                                html += '<div class="wenda-time"> '+k.strtime+'<em></em> </div>';
+
+                                                html += '<div class="qa-comment-addon-r fr">';
+                                                html += '<span class="qa-total-reply">';
+                                                ""
+                                                html += '<span show_id="'+k.id+'" type="review" class="js-qa-tr-num review"><i class="icon-pl"></i><span class="com_num">'+k.review_comment_count;
+                                                ""
+                                                html += '<span cancel_id="'+k.id+'" type="review" class="qa-tr-up "><b><i></i></b></span>';
+                                                html += '</span>';
+                                                html += '</span>';
+
+                                                html += '<span  class="js-qa-comment-support qa-comment-support  js-qacom-supported-user">'
+                                                html += '<span t_id="'+k.id+'" type="review" class="js-qa-comment-support qa-comment-support  js-qacom-supported-user tongwenreview"><i class="icon-zan"></i><span><span class="t_num">'+k.yong+'</span></span>';
+                                                html += '</div></div>';
+                                                html += ' </dd>';
+                                                html += '</dl>';
+                                                html += '</div>';
+                                                html += '</div>';
+                                                //回复部分
+                                                html +='<div id="review_'+k.id+'" style=" display:none" class="qa-replies width-wd">';
+                                                html +='<div class="qa-reply-c"></div>';
+                                                html +='<div  class=" qa-reply-ibox clearfix">';
+                                                html +='<div class="qa-reply-iwrap">';
+                                                html +='<div class="qa-reply-iarea">';
+                                                html +='<input type="hidden" class="reply_uid" value="0"/>';
+                                                html +='<textarea name="review_comment" id="reviewf_'+k.id+'" rid="'+k.id+'" class="js-reply-ipt-default" placeholder="写下你的评论..."></textarea>';
+                                                html +='</div>';
+                                                html +='<div class="qa-reply-footright fr"> <span class="qa-tips"></span>';
+                                                html +='<button class="btn-mc-light js-ipt-cancel note_cancel">取消</button>';
+                                                html +='<button sub_id="'+k.id+'" type="review" uid="review" class="btn-mc btn-mini btn-mc-green  js-ipt-submit note_sub">提交</button>';
+                                                html +='</div>';
+                                                html +='</div>';
+                                                html +='</div>';
+                                                html +='</div>'; //内容结束
+                                            }); //each
+                                        }
+
+                                        //分页  if(data.totalPages > 1)
+                                        if(data.totalPages > 1) html += '<div class="reviewPage sabrosus">'+data.html+'</div>';
+                                        if($('.video-review .review_con').size() <=0){
+                                            //综合评分
+                                            $(".indo-mess").append(html_list);
+                                            //点评内容
+                                            $('.video-review').append(html);
+                                        }else{
+                                            $(".video-review").children().not('#review-comments').remove();
+                                            $('.video-review').append(html);
+                                            $(".indo-mess").html('');
+                                            $(".indo-mess").append(html_list);
+                                            $('#review-comments').hide();
+                                        }
+                                    },'json'); //post
+                                }
+
+                                //星星评分
+                                function score(id)
+                                {
+                                    var oStarUl=document.getElementById(id);
+                                    var aLi=oStarUl.children;
+                                    for(var i=0; i<aLi.length; i++)
+                                    {
+                                        //aLi[i].style.backgroundPosition=i%2?'-12px 0':'0 0';
+                                        aLi[i].index=i;
+                                        //鼠标移入
+                                        aLi[i].onmouseover=function ()
+                                        {
+                                            for (var i=0; i<aLi.length; i++)
+                                            {
+                                                aLi[i].className="grade-back-default";
+                                            }
+
+                                            for (var i=0; i<this.index+1; i++)
+                                            {
+                                                aLi[i].className="grade-back-set";
+                                            }
+                                        };
+                                        aLi[i].onclick=function ()
+                                        {
+                                            $("#course_score").val(this.index+1);
+                                            $('#how-score').text('评分:'+(this.index+1)+'分');
+                                        };
+                                    }
+                                }
+
+                                $('.video-review').on('click','.tongwenreview',function(){
+                                    var t_id = $(this).attr('t_id');
+                                    var t_type = $(this).attr('type');
+                                    var _this = $(this);
+                                    eval('var tw_type='+t_type+'_type');//分类类型 1:提问,2:点评,3:笔记
+                                    $.post("http://try.51eduline.com/index.php?app=classroom&mod=Index&act=tongwen",{rid:t_id,type:tw_type},function(data){
+                                        if(data.status == 1){
+                                            var num = parseInt(_this.find('.t_num').text())+1;
+                                            _this.find('.t_num').text(num);
+                                        }else{
+                                            ui.error(data.info);
+                                        }
+                                    },'json');
+                                });
+
+                                $(document).ready(function(){
+
+                                    //显示/隐藏点评输入框
+                                    $('.title a,.js-ipt-cancel').on('click',function(){
+                                        if(UID<=0){
+                                            reg_login();
+                                            return false;
+                                        }
+                                        var types = $(this).attr('type');
+                                        $('#'+types+'-comments').toggle();
+                                    });
+                                    // 取消
+                                    $(".btn-mc-light").click(function(){
+
+                                    });
+
+                                    //提交评论
+                                    $('button.js-ipt-submit').live('click',function(){
+                                        if(MID<=0){
+                                            ""
+                                            ui.confirm('请先登录', {
+                                                yes: function () {
+                                                    window.location.href = "http://try.51eduline.com/login.html";
+                                                }
+                                            });
+                                            ""
+                                            return false;
+                                        }
+                                        var sub_id = $(this).attr('sub_id');
+                                        var stype = $(this).attr('type');
+                                        var sub_this = $(this);
+                                        if(stype=="submit"){
+                                            stype = $(this).attr('uid');
+                                        }
+                                        eval('var type='+stype+'_type');  //分类类型 1:提问,2:点评,3:笔记
+
+                                        var content = $("#"+stype+'f_'+sub_id).val();
+                                        //@用户id
+                                        var reply_uid = parseInt($("#"+stype+'f_'+sub_id).siblings('.reply_uid').val());
+                                        var checktxt = $("#"+stype+'f_'+sub_id).siblings('.reply_uid').attr('checktxt');
+                                        content=content.replace(/&nbsp;/ig, "");
+                                        content = content.replace(/[ ]/g,"");//去除空格
+                                        content = content.replace(/<[^>].*?>/g,"");//去html标签
+                                        //@用户验证
+                                        if(reply_uid != 0){
+                                            content = content.replace(/^回复@[^:：\s]*[:：\s]*/, '');
+                                        }
+                                        if(content == ""){
+                                            ui.error('请输入评论!');
+                                            return false;
+                                        }
+                                        for(var i=0; i<arr.length; i++)
+                                        {
+                                            if(content.indexOf(arr[i])>-1)
+                                            {
+                                                ui.error('评论不得包含敏感词!');
+                                                return false;
+                                            }
+                                        }
+                                        $.post("http://try.51eduline.com/index.php?app=classroom&mod=Index&act=dowrite",{rid:sub_id,content:content,type:type,rep_uid:reply_uid},function(txt){
+                                            if(txt.status == 1){
+                                                var  html = '';
+                                                html += '<div class="qa-reply-item">';
+                                                html += '<a class="qa-reply-item-author" href="'+txt.data.user_src+'" title="'+txt.data.username+'"><img width="40" height="40" src="'+txt.data.userface+'"></a>';
+                                                html += '<div class="qa-reply-item-inner">';
+                                                html += '<p class="username"> <a href="'+txt.data.user_src+'" class="qa-reply-nick">'+txt.data.username+'</a> : </p>';
+                                                html += '<p class="q-reply-item-c">'+txt.data.description+' </p>';
+                                                html += '<div class="qa-reply-item-foot clearfix"> <span class="reply-item-index r">#</span> <span>'+txt.data.strtime+'</span> <span class="qa-reply-item-reply js-reply-item-reply qst_reply" reply_uid="'+txt.data.uid+'" type="'+stype+'" reply_id="'+txt.data.parent_id+'"><i class="qa-icon"></i>回复</span> </div>';
+                                                html += '</div>';
+                                                html += '</div>';
+                                                if($("#"+stype+'_'+sub_id+' .qa-reply-c .qa-reply-item').size() <= 0){
+                                                    $("#"+stype+'_'+sub_id+' .qa-reply-c').append(html);
+                                                }else{
+                                                    $("#"+stype+'_'+sub_id+' .qa-reply-c .qa-reply-item').first().before(html);
+                                                }
+                                                //评论条数+1
+                                                var com_num = parseInt($("#"+stype+'_'+sub_id).prev().find('span.com_num').text())+1;
+                                                $("#"+stype+'_'+sub_id).prev().find('span.com_num').text(com_num);
+                                                $("#"+stype+'f_'+sub_id).val('');
+                                            }else{
+                                                notes(txt.info,'xq_transparent');
+                                            }
+                                        },'json');
+                                    });
+                                });
+                            </script>
+                            <!-- 点评结束 -->                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="liveside sideBar">
+            <div class="teacher card" style="margin-top: 0px;">
+                <h3 class="title">讲师信息</h3>
+                <div class="details">
+                    <div class="photo"><a href="http://try.51eduline.com/teacher/1.html" target="_blank"><img src="http://try.51eduline.com/data/upload/2018/0808/15/5b6a97885fded_120_120_120_120.png" width="120" height="120"></a></div>
+                    <div class="right">
+                        <div class="name"><a href="http://try.51eduline.com/teacher/1.html" target="_blank">测试机构1讲师1</a></div>
+                        <div class="info">
+                            <p><pstyle="white-space:normal;">她以不对称、曲面状的前卫服饰闻名全球，受..</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="org card">
+                <h3 class="title">机构信息</h3>
+                <div class="details">
+                    <div class="photo"><a href="http://aa.try.51eduline.com" target="_blank"><img src="http://try.51eduline.com/data/upload/2018/0808/15/5b6a9c4eaa219_120_120_120_120.png"></a></div>
+                    <div class="right">
+                        <div class="name"><a href="http://aa.try.51eduline.com" target="_blank">
+                            测试机构1</a></div>
+                        <div class="info"><p>这是测试机构1</p></div>
+                    </div>
+                </div>
+                <ul class="class_jg_ul">
+                    <li>
+                        <p>课程数</p>
+                        <span>23</span>
+                    </li>
+                    <li>
+                        <p>讲师数</p>
+                        <span>6</span>
+                    </li>
+                    <li>
+                        <p>学生数</p>
+                        <span>79</span>
+                    </li>
+                </ul>
+            </div>        </div>
+
+        <div class="clear"></div>
+    </div>
+</div>
+<script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery.qrcode.min.js"></script>
+<script>
+    var view_main_nav = document.getElementById('view_main_nav');
+
+    window.onload=function(){
+        window.onscroll = function(){
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if(scrollTop <= 673){
+                $('.livetopitem_btn').hide();
+                $('#view_main_nav').removeAttr("style");
+            }else if(scrollTop > view_main_nav.offsetTop && scrollTop <= 673){
+                $('#view_main_nav').removeAttr("style");
+            }else if(scrollTop > view_main_nav.offsetTop){
+                $('.livetopitem_btn').show();
+                $('#view_main_nav').attr("style","position: fixed;top: 0;z-index: 9;width:1200px;");
+            }else{
+                $('#view_main_nav').removeAttr("style");
+            }
+        }
+    };
+
+    var id = '0';
+
+    //头部点击事件
+    $(".course-tab-nav").on("click","li",function () {
+        var _this= $(this).children()[0];
+        navClick($(_this),$(_this).attr("type"));
+    });
+
+    function navClick(cate,type){
+        startype  = type;
+        $('#ordertype').val(type);
+        $(".user-wenda").html("");
+        $(".indo-mess").html("");
+        type = type;
+        $("li").removeClass("active");
+        cate.parent("li").addClass("active");
+        p=1;
+        getReview(p);
+    }
+</script>
+<script type="text/javascript">
+    var uid = '0';
+    var liveid = '154';
+    var arr=['他妈的', '你妈的', '傻×', '衮蛋', '你妹儿'];
+    $(function(){
+
+        //点击购买
+        $('#charge_video,#charge_video2,#charge_video01').click(function () {
+            if(UID<=0){
+                reg_login();
+                return false;
+            }
+            var form  = $('#pay_form');
+            var vid = form.find('input:hidden[name="vid"]').val();
+            var vtype = form.find('input:hidden[name="check_type"]').val();
+
+            if(!vid || !vtype){
+                ui.error('参数错误');
+                return false;
+            }
+
+            var money = form.find('input:hidden[name="money"]').val();
+            if(money <= 0){
+                ui.confirm('该直播课程需要加入免费看单后方可学习，确定加入？', {
+                    yes: function () {
+                        var form  = $('#pay_form');
+                        var vid = form.find('input:hidden[name="vid"]').val();
+                        var vtype = form.find('input:hidden[name="check_type"]').val();
+
+                        $.post(U("course/PayVideo/add_order"),{vid:vid,vtype:vtype},function(data){
+                            if(data.status == 1){
+                                ui.success(data.info, {
+                                    end: function() {
+                                        window.location.reload();
+                                    }
+                                });
+                                return false;
+                            } else {
+                                ui.error(data.info);
+                                return false;
+                            }
+                        },'json');
+                    }
+                });
+                return false;
+            }
+
+            $.post(U("course/PayVideo/checkPay"),$('#pay_form').serialize(),function(data){
+                if(data.status == 1){
+                    window.location.href = "http://try.51eduline.com/pay/kMCSYrEnKS2gnb4R9.html";
+                } else if(data.status == 9){
+                    ui.success(data.info, {
+                        end: function() {
+                            window.location.reload();
+                        }
+                    });
+                    return false;
+                } else {
+                    ui.error(data.info, function(){
+                        //关闭后的操作
+                    });
+                    return false;
+                }
+            },'json');
+        });
+
+        //同意协议
+        $('.agreement #protocol').click(function(){
+            var type = $(this).attr('class');
+            if(type == 'no-agree'){
+                $(this).attr('class','agree');
+            }else{
+                $(this).attr('class','no-agree');
+            }
+        });
+
+        //进入直播
+        $('#go_live').click(function(){
+            if(id <= 0){
+                reg_login();
+                return false;
+            }
+        });
+
+        //显示更多
+        $('.qa-reply-more .loadMore').live('click',function(){
+            var id = $(this).attr('more_id');
+            var moreType = $(this).attr('type');
+            var page = $(this).attr('page');
+            eval('var moreTypes='+moreType+'_type');  //分类类型 1:提问,2:点评,3:笔记
+            eval('var limit='+moreType+'_limit');  //查询条数
+            $.post("http://try.51eduline.com/index.php?app=widget&mod=Resource&act=getListForId",{id:id,type:moreTypes,limit:limit,p:page},function(txt){
+                showComment(txt.data,moreType,id,txt.nowPage,txt.count);
+            },'json');
+        });
+    });//控制回答别人回复下面的textarea 提交按钮
+
+    //上边的js什么的是以前的
+
+    $(function(){
+        $(".hide_box").fadeToggle();
+        $(".shang_box").fadeToggle();
+    });
+    function dashangToggle(){
+        $('.mask').hide();
+        $(".hide_box").fadeToggle();
+        $(".shang_box").fadeToggle();
+    }
+
+    (function(){
+        $('#xiangqing').css('display','none');
+        $('#dagang').css('display','block');
+        $('#pingjia').css('display','none');
+    })();
+
+    //收藏课程
+    function collectVideo(cate,vid,type){
+        if(UID=='0'){
+            reg_login();
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url:"http://try.51eduline.com/index.php?app=classroom&mod=Public&act=collect",
+            data:{type:type,sctype:2,source_id:vid,is_video:2},
+            dataType:"json",
+            cache: false,
+            success: function(data){
+                if(data.status == 0){
+                    ui.error(data.info);
+                } else {
+                    ui.success(data.info, {
+                        end: function() {
+                            window.location.reload();
+                        }
+                    });
+                }
+            },
+        });
+    }
+
+    function switchnav(obj , id){
+        $('body,html').animate({scrollTop:470},200);//673
+
+        $('li').removeClass('on');
+        $(obj).parent().addClass('on');
+        if( id == 'xiangqing') {
+            $('#xiangqing').css('display','block');
+            $('#dagang').css('display','none');
+            $('#pingjia').css('display','none');
+        }
+        if( id == 'dagang') {
+            $('#dagang').css('display','block');
+            $('#xiangqing').css('display','none');
+            $('#pingjia').css('display','none');
+        }
+        if( id == 'pingjia') {
+            $('#pingjia').css('display','block');
+            $('#dagang').css('display','none');
+            $('#xiangqing').css('display','none');
+        }
+    }
+
+    $(document).ready(function(){
+
+        //     $(".js-reply-ipt-default").mousedown(function(){
+        //         $(".qa-reply-footright").css("display","block");
+        //     });
+        //
+        //     $("#video_insearch").mousedown(function(){
+        //         $(".qa-reply-footright").css("display","block");
+        //     });
+        //
+        //     //点击评论取消按钮
+        $('.js-ipt-cancel').live('click',function(){
+            var cancel_id = $(this).siblings('button.js-ipt-submit').attr('sub_id');
+            var cancel_type = $(this).siblings('button.js-ipt-submit').attr('type');
+            $("#"+cancel_type+'_'+cancel_id).prev().find('.js-qa-tr-num').show();
+            $("#"+cancel_type+'_'+cancel_id).prev().find('.qa-tr-up').hide();
+            $("#"+cancel_type+'_'+cancel_id).hide();
+
+
+            //背景样式
+            $("#"+cancel_type+'_'+cancel_id).prev().find(".qa-total-reply.qa-icon").css("background-position","-25px -83px");
+            $("#"+cancel_type+'_'+cancel_id).prev().find(".js-qa-tr-num").css("display", "inline");
+        });
+        //
+        //     //点击收起评论
+        $('.qa-total-reply span.qa-tr-up').live('click',function(){
+            var cancel_id = $(this).attr('cancel_id');
+            var ctype = $(this).attr('type');
+            $("#"+ctype+"_"+cancel_id).hide();
+
+            $(this).css("display", "none");
+            $(this).siblings(".qa-total-reply .qa-icon").css("background-position","-25px -83px");
+            $(this).siblings(".js-qa-tr-num").css("display", "inline");
+        });
+        //
+        //显示评论
+        $('.qa-total-reply .js-qa-tr-num').live('click',function(){
+            if(MID ==0){
+                reg_login();
+                return;
+            }
+            $(this).css("display", "none"); //隐藏js-qa-tr-num
+            $(this).siblings(".qa-icon").css("background-position","-25px -107px"); //显示js-qa-tr-num同级的qa-icon  hover事件
+            $(this).siblings(".qa-tr-up").css({"display":"inline","color":"#333333"}); //显示js-qa-tr-num同级的qa-tr-up
+            var show_id = $(this).attr('show_id');
+            var stype = $(this).attr('type');
+            eval('var kztype='+stype+'_kztype');  //数据分类 1:课程;2:班级;
+            eval('var kzid='+stype+'_kzid');  //课程或者班级ID
+            eval('var type='+stype+'_type');  //分类类型 1:提问,2:点评,3:笔记
+            // eval('var limit='+stype+'_limit');  //查询条数
+            eval('var page='+stype+'_page');  //当前分页
+            $("#"+stype+"_"+show_id).show();
+            $.post("http://try.51eduline.com/index.php?app=widget&mod=Resource&act=getListForId",{id:show_id,type:type,limit:6},function(txt){
+                showComment(txt.data,stype,show_id,txt.nowPage,txt.count);
+            },'json');//post
+        });
+
+        //     //显示更多
+        $('.qa-reply-more .loadMore').live('click',function(){
+            var id = $(this).attr('more_id');
+            var moreType = $(this).attr('type');
+            var page = $(this).attr('page');
+            eval('var moreTypes='+moreType+'_type');  //分类类型 1:提问,2:点评,3:笔记
+            eval('var limit='+moreType+'_limit');  //查询条数
+            $.post("http://try.51eduline.com/index.php?app=widget&mod=Resource&act=getListForId",{id:id,type:moreTypes,limit:limit,p:page},function(txt){
+                showComment(txt.data,moreType,id,txt.nowPage,txt.count);
+            },'json');
+        });
+        //
+        //     //@回复
+        $('.qst_reply').live('click',function(){
+            var atype = $(this).attr('type');
+            var reply_id = $(this).attr('reply_uid');
+            var id = $(this).attr('reply_id');
+            var name = $(this).parents('.qa-reply-item-foot').siblings('.username').find('a').text();
+            $('#'+atype+'f_'+id).val('回复@'+name+':');
+            $(this).parents('.qa-reply-c').siblings('.qa-reply-ibox').find('.reply_uid').val(reply_id);
+            //$('#'+atype+'_'+reply_id).val(reply_uid).attr('checktxt','回复@'+name);
+        });
+        //
+        //     //点评前判断
+        $('.js-reply-ipt-default').live('click',function(){
+            if(id<=0){
+                reg_login();
+                return false;
+            }
+        });
+    });
+
+    //控制回答别人回复下面的textarea 提交按钮
+    function showComment(data,type,id,nowPage,count){
+        var html = '';
+        $.each(data,function(i,k){
+            html += '<div class="qa-reply-item">';
+            html += '<a class="qa-reply-item-author" href="'+k.user_src+'" title="&#12288;"><img width="40" height="40" src="'+k.userface+'"></a>';
+            html += '<div class="qa-reply-item-inner">';
+            html += '<p class="username"> <a href="'+k.user_src+'" class="qa-reply-nick">'+k.username+'</a> : </p>';
+            if(k.reply_user != ''){
+                html += '<p class="q-reply-item-c">回复@<span class="user-reply">'+k.reply_user+'</span>:'+k.content+' </p>';
+            }else{
+                html += '<p class="q-reply-item-c">'+k.content+' </p>';
+            }
+            html += '<div class="qa-reply-item-foot clearfix"> <span class="reply-item-index r">#</span> <span>'+k.strtime+'</span> <span class="qa-reply-item-reply js-reply-item-reply qst_reply" reply_uid="'+k.uid+'" type="'+type+'" reply_id="'+k.parent_id+'"><i class="qa-icon"></i>回复</span> </div>';
+            html += '</div>';
+            html += '</div>';
+        });
+        html += '<div class="qa-reply-more"><a page="'+(parseInt(nowPage)+1)+'" class="loadMore" type="'+type+'" more_id="'+id+'" href="javascript:;">击显示更多</a></div>';
+        if(nowPage <= 1){
+            $("#"+type+"_"+id).find('.qa-reply-c').html('');
+        }
+        $("#"+type+"_"+id).find('.qa-reply-c').append(html);
+        $("#"+type+"_"+id).show();
+        if(count <= $("#"+type+"_"+id).find('.qa-reply-item').size()){
+            $("#"+type+"_"+id).find('div.qa-reply-more').hide();
+        }
+    }
+    window.onload=function(){
+        $("td>.colorOn").parent().parent().css("color","#333")
+    }
+</script>
+<script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/lazyload.js"></script>
+
+<style>
+    .zhuang-left:hover ._share_my_firends{display:block}
+    ._share_my_firends{height:62px;position:absolute;right:44px;bottom:3px;width:168px;top:0;left:0;display:none;margin-top:20px}
+    ._share_all_channel{margin-top:13px;width:155px;background-color:#fff;border-radius:4px;box-shadow:0 2px 8px rgba(83,87,88,.2);margin-top:10px}
+    .side-ills-fell{width:0!important;position:absolute;height:0!important;top:5px;left:11px;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:5px solid #FFF}
+
+</style>
+
+<!--footer-->
+<!--footer start-->
+<div class="post-service yensen">
+    <div class="other-service">
+        <div class="service-class" style='width:160px; '>
+            <a target="_blank"  href="javascript:;"
+            ><span>服务规则</span></a>
+            <a target="_blank"                         href="http://try.51eduline.com/single/1.html"  >绑卡验证协议</a><a target="_blank"                         href="http://try.51eduline.com/single/2.html"  >会员服务协议</a><a target="_blank"                         href="http://try.51eduline.com/single/23.html"  >合作专区</a><a target="_blank"                         href="http://try.51eduline.com/single/25.html"  >机构帮助</a><a target="_blank"                         href="http://try.51eduline.com/single/26.html"  >机构入驻协议</a>            </div><div class="service-class" style='width:160px; '>
+        <a target="_blank"  href="javascript:;"
+        ><span>机构入驻</span></a>
+        <a target="_blank"                         href="http://try.51eduline.com/single/4.html"  >第一步</a><a target="_blank"  href="javascript:;"
+    >机构入驻</a><a target="_blank"                         href="http://try.51eduline.com/single/5.html"  >第二步</a><a target="_blank"                         href="http://try.51eduline.com/single/6.html"  >第三步</a><a target="_blank"  href="javascript:;"
+    >第四步</a>            </div><div class="service-class" style='width:160px; '>
+        <a target="_blank"  href="javascript:;"
+        ><span>用户注册</span></a>
+        <a target="_blank"                         href="http://try.51eduline.com/single/9.html"  >第一步</a><a target="_blank"                         href="http://try.51eduline.com/single/10.html"  >第二步</a><a target="_blank"                         href="http://try.51eduline.com/single/11.html"  >第三步</a><a target="_blank"  href="javascript:;"
+    >第四步</a>            </div><div class="service-class" style='width:160px; '>
+        <a target="_blank"  href="javascript:;"
+        ><span>名师签约</span></a>
+        <a target="_blank"                         href="http://try.51eduline.com/single/13.html"  >联系平台</a><a target="_blank"                         href="http://try.51eduline.com/single/14.html"  >后台审核</a><a target="_blank"                         href="http://try.51eduline.com/single/15.html"  >签约成功</a>            </div><div class="service-class" style='width:160px; '>
+        <a target="_blank"  href="javascript:;"
+        ><span>平台流程</span></a>
+        <a target="_blank"  href="javascript:;"
+        >个人用户</a><a target="_blank"                         href="http://try.51eduline.com/single/18.html"  >机构（名师）用户</a><a target="_blank"                         href="http://try.51eduline.com/single/19.html"  >第二级页面展示</a>            </div>        <div class="tel-box">
+        <div class="week">关注官方微信</div>
+        <div class="tel-icon">
+            <img src="http://try.51eduline.com/data/upload/2018/0808/14/5b6a92f043126_120_120_120_120.jpg">
+        </div>
+    </div>
+    </div>
+    <div class="copyright-box">
+        Copyright 2017 seition All Rights Reserved  |  蜀ICP 备 16004612号    </div>
+</div>
+<!--footer end-->
+<div class="sidernav">
+    <ul>
+        <!--<li>-->
+        <!--<a href="javascript:;">-->
+        <!--<i class="icon-02"></i>-->
+        <!--</a>-->
+        <!--<div class="xiala">-->
+        <!--<img src="http://try.51eduline.com/data/upload//_120_120." alt="">-->
+        <!--<p>扫描下载APP</p>-->
+        <!--</div>-->
+        <!--</li>-->
+
+        <li>
+            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3132698449&site=http://try.51eduline.com&menu=yes"> <i class="icon-03"></i>
+            </a>
+            <div class="qq_and_phone_info_div">
+                <div class="siderbox">
+                    <dl>
+                        <dt class="qq_info_dt">
+                            <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=3132698449&site=http://try.51eduline.com&menu=yes">
+                                <span class="icon-qq"></span>QQ在线咨询</a>
+                        </dt>
+                    </dl>
+                    <dl>
+                        <dt><span class="icon-ph"></span>咨询热线：</dt>
+                        <dd style="color:#188eee;">010-5334-5805</dd>
+                        <dd style="color:#25c151;">136-2125-8074</dd>
+                    </dl>
+                </div>
+            </div>
+        </li>
+
+        <li>
+            <a href="javascript:;">
+                <i class="icon-05"></i>
+            </a>
+            <div class="xiala">
+                <img src="http://try.51eduline.com/data/upload/2018/0808/14/5b6a92e7ca6bf_120_120_120_120.png" alt="">
+                <p>扫一扫关注官方<span style="color: #FB7D30">微博</span></p>
+            </div>
+        </li>
+
+        <li>
+            <a href="javascript:;">
+                <i class="icon-06"></i>
+            </a>
+            <div class="xiala">
+                <img src="http://try.51eduline.com/data/upload/2018/0808/14/5b6a92f043126_120_120_120_120.jpg" alt="">
+                <p>扫一扫关注官方<span style="color: #8BDA64">微信</span></p>
+            </div>
+        </li>
+
+        <li class="backtop"><a href="javascript:;"><i class="icon-07"></i></a></li>
+    </ul>
+</div>
+<script src="http://try.51eduline.com/online_check.php?uid=0&uname=&mod=Index&app=live&act=view&action=trace"></script>
+<script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/lazyload/jquery.lazyload.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        // 初始化
+        $("img.lazyload").lazyload({
+            effect: "fadeIn",
+            placeholder: "http://try.51eduline.com/addons/theme/stv1/_static/images/loading_image.png"
+        });
+    });
+</script>
+
+</body>
+
+</html>
