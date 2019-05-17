@@ -24,7 +24,7 @@
     })
     function  initOne(){
         $.ajax({
-            url:"http://localhost:8080/test1/findTwo",
+            url:"http://192.168.1.125:8080/test1/findTwo",
             dataType:"json",
             success:function(data){
                 var chart = Highcharts.chart('container2', {
@@ -81,7 +81,7 @@
     }
      function initTwo(){
          $.ajax({
-             url:'http://localhost:8080/test1/findOne',
+             url:'http://192.168.1.125:8080/test1/findOne',
              type:'get',
              contentType: "application/json",
              dataType:'json',

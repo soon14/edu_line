@@ -71,7 +71,7 @@
             <li><a href="../admin/bunch_planting.html?app=course&mod=AdminVideo&act=index&tabHash=index" >已审</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=unauditList&tabHash=unauditList" >待审</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=recycle&tabHash=recycle" >回收站</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=addVideo&tabHash=addVideo" class="on">添加</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=videoLib&tabHash=videoLib" >课件库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=problemQuestionBank&tabHash=problemQuestionBank" >视频弹题题库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=videoLibVerify&tabHash=videoLibVerify" >CC待同步视频库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=export&tabHash=export" >导出</a></li>        </ul>
     </div>
 
-    <form method="POST" action="http://127.0.0.1:8080/user/adduser" id="detail_form" name="detail_form" onsubmit="return j_validateCallback(this,checkForm,post_callback)">
+    <form method="POST" action="http://192.168.1.115:8080/user/adduser" id="detail_form" name="detail_form" onsubmit="return j_validateCallback(this,checkForm,post_callback)">
         <input type="hidden" name="systemdata_list" value="video_Admin" class="s-txt">
         <input type="hidden" name="systemdata_key" value="addVideo" class="s-txt">
         <input type="hidden" name="pageTitle" value="添加课程" class="s-txt">
@@ -116,7 +116,7 @@
                 })
                 function querycourseorgid(){
                     $.ajax({
-                        url:'http://127.0.0.1:8080/bunch/findCouserorgBean',
+                        url:'http://192.168.1.115:8080/bunch/findCouserorgBean',
                         type:'get',
                         success:function(data){
                             var html = "<option value='-1'>请选择</option>";
@@ -129,15 +129,12 @@
                     })
                 }
             </script>
-
-
             <div class="page_btm">
                 <input type="submit" class="btn_b" value="保存" >
             </div>
         </div>
     </form>
 </div>
-
 <script type="text/javascript">
 </body>
 </html>

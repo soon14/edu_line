@@ -20,16 +20,16 @@
         var success = {icon:1,time:1800,btn:false,title:'',closeBtn:0};
         var error = {icon:2,time:1800,btn:false,title:'',closeBtn:0};
     </script>
-    <script type="text/javascript" src="../addons/theme/stv1/_static/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="../addons/theme/stv1/_static/js/core.js"></script>
-    <script type="text/javascript" src="../apps/admin/_static/js/module.js"></script>
-    <script src="../addons/theme/stv1/_static/js/common.js"></script>
-    <script src="../addons/theme/stv1/_static/js/module.common.js"></script>
-    <script type="text/javascript" src="../apps/admin/_static/js/admin.js"></script>
-    <script type="text/javascript" src="../addons/theme/stv1/_static/js/ui.layer.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/core.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/apps/admin/_static/js/module.js"></script>
+    <script src="http://try.51eduline.com/addons/theme/stv1/_static/js/common.js"></script>
+    <script src="http://try.51eduline.com/addons/theme/stv1/_static/js/module.common.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/apps/admin/_static/js/admin.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/ui.layer.js"></script>
     <!--非admin应用的后台js脚本统一写在  模板风格对应的app目录下的admin.js中-->
     <style>
-        @font-face {font-family: 'iconfontNEW';src: url('../addons/theme/stv1/_static/icon/iconfontNEW.woff?v={$site.sys_version}');}
+        @font-face {font-family: 'iconfontNEW';src: url('http://try.51eduline.com/addons/theme/stv1/_static/icon/iconfontNEW.woff?v={$site.sys_version}');}
         .iconfontNEW{font-family: iconfontNEW;font-style: normal;}
     </style>
 </head>
@@ -44,10 +44,57 @@
         .tit_tab li a.on{border-bottom:none;color: #FFF;display: inline-block;background: #3b5999;}
         .tit_tab li a{padding: 0px 10px;}
     </style>
+    <div class="form2" id='search_form'>
+        <form name="statis" method="POST" action="http://try.51eduline.com/index.php?app=admin&mod=Home&act=courseSales">
+            <div class="form2">
+                <dl class="lineD" id="dl_mhm_id">
+                    <dt>机构选择 : </dt>
+                    <dd>
+                        <select name="mhm_id" size="1" class='s-select'>
+                            <option value="0">全部</option>
+                            <option value="1">测试机构1</option><option value="2">测试机构2</option><option value="3">测试机构3</option><option value="4">测试机构4</option><option value="5">测试机构5</option><option value="6">测试机构6</option><option value="7">测试机构7</option><option value="8">测试机构8</option><option value="9">测试机构9</option><option value="10">测试机构10</option><option value="31">牛顿课堂</option><option value="37">金科教育</option>		</select>
+                    </dd>
+                </dl>
+                <dl class="lineD" id="dl_teacher_id">
+                    <dt>讲师 : </dt>
+                    <dd>
+                        <span>请先选择机构</span>
+                        <select name="teacher_id" class='s-select' style="display: none;">
+                        </select>
+                    </dd>
+                </dl>
+                <dl class="lineD" id="dl_phone">
+                    <dt>快速选择时间 : </dt>
+                    <dd>
+                        <div class="tit_tab">
+                            <select name="quick_time">
+                                <option value="today">今天</option><option value="-1%7Eweek">近七天</option><option value="-1%7Emonth">近一个月</option><option value="-3%7Emonth">近三个月</option>            </select>
+                        </div>
+
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>选择时间段 : </dt>
+                    <dd>
+                        <input type="text" style="width:200px;height:12px;line-height:12px" readonly="readonly" onfocus="core.rcalendar(this,'full');" value="" id="start_ctime" class="s-txt" name="start_ctime">
+                        -
+                        <input type="text" style="width:200px;height:12px;line-height:12px" readonly="readonly" onfocus="core.rcalendar(this,'full');" value="" id="end_ctime" class="s-txt" name="end_ctime">
+                        <p>选择时间段后,以此时间为筛选时间</p>
+                    </dd>
+                </dl>
+                <div class="page_btm" >
+                    <input type="submit" class="btn_b" value="开始统计" id='form_submit'/>
+                </div>
+            </div>
+        </form>
+    </div>
+  <!--  <div class="Toolbar_inbox">
+        <a onclick="admin.fold('search_form')" class="btn_a"><span>统计过滤</span></a>
+    </div>-->
     <!-- START LIST -->
     <div id="courseSales_chart" style="width: 100%;height:300px;">
     </div>
-    <script  type="text/javascript" src="../addons/theme/stv1/_static/js/echarts/echarts.min.js"></script>
+    <script  type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/echarts/echarts.min.js"></script>
     <script type="text/javascript">
         $(function(){
             // 查询讲师
@@ -70,7 +117,7 @@
                     $("select[name='teacher_id']").prev('span').hide();
                 });
             });
-            var time = '2019-05-16';
+            var time = '2019-05-17';
             // 折线
             var courseSalesEcharts = echarts.init(document.getElementById('courseSales_chart'));
             Echarts = echarts.init(document.getElementById('courseSales_chart'));
@@ -86,7 +133,7 @@
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: JSON.parse('["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00"]')
+                    data: JSON.parse('["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00"]')
                 },
                 yAxis: {
                     type: 'value',
@@ -110,7 +157,7 @@
                     smooth: true,
                     name: '点播课程',
                     stack: '点播课程',
-                    data: JSON.parse('["0","0","0","0","0","0","0","0","0","0","2"]'),
+                    data: JSON.parse('["0","1","0","0","0","0","0","0","0","0","0","0","0","0"]'),
                 }, {
                     type: 'line',
                     markPoint: {
@@ -126,7 +173,7 @@
                     smooth: true,
                     name: '直播课程',
                     stack: '直播课程',
-                    data: JSON.parse('["0","0","0","1","0","0","0","0","0","0","0"]'),
+                    data: JSON.parse('["0","0","0","1","0","0","0","0","0","0","0","0","0","0"]'),
                 }, {
                     type: 'line',
                     markPoint: {
@@ -142,7 +189,7 @@
                     smooth: true,
                     name: '班级课程',
                     stack: '班级课程',
-                    data: JSON.parse('["0","0","0","0","0","0","1","0","0","0","0"]'),
+                    data: JSON.parse('["0","0","0","0","0","0","0","0","0","0","0","0","0","0"]'),
                 }, {
                     type: 'line',
                     markPoint: {
@@ -158,7 +205,7 @@
                     smooth: true,
                     name: '线下课程',
                     stack: '线下课程',
-                    data: JSON.parse('["0","0","2","0","1","0","2","0","0","0","0"]'),
+                    data: JSON.parse('["0","0","0","0","0","0","0","0","0","0","0","0","0","0"]'),
                 }],
                 tooltip: {
                     trigger: 'axis',
@@ -196,7 +243,7 @@
 
             //数据导出
             $("#export").on('click', function(){
-                window.location.href = "../index.php?app=admin&mod=Home&act=export&tpl=course";
+                window.location.href = "http://try.51eduline.com/index.php?app=admin&mod=Home&act=export&tpl=course";
             });
 
         });
@@ -223,5 +270,6 @@
     $(document).ready(function(){
         admin.bindTrOn();});
 </script>
+
 </body>
 </html>

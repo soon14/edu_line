@@ -140,7 +140,7 @@
     var cardvue;
     $(function() {
         $.ajax({
-            url: 'http://127.0.0.1:8080/bunch/buquerybunch2',
+            url: 'http://192.168.1.115:8080/bunch/buquerybunch2',
             type: 'get',
             success: function (data) {
                 cardvue = new Vue({
@@ -152,7 +152,7 @@
                         deletebunchById(id) {
                             alert("进入删除")
                             $.ajax({
-                                url: 'http://127.0.0.1:8080/bunch/deletebunchById',
+                                url: 'http://192.168.1.115:8080/bunch/deletebunchById',
                                 data: {
                                     id: id
                                 },

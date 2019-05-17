@@ -1,17 +1,16 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link href="../apps/admin/_static/css/admin.css" rel="stylesheet" type="text/css">
+    <link href="http://try.51eduline.com/apps/admin/_static/css/admin.css" rel="stylesheet" type="text/css">
     <script>
         /**
          * 全局变量
          */
-        var SITE_URL  = 'localhost';
-        var THEME_URL = '../addons/theme/stv1/_static';
+        var SITE_URL  = 'http://try.51eduline.com';
+        var THEME_URL = 'http://try.51eduline.com/addons/theme/stv1/_static';
         var APPNAME   = 'admin';
-        var UPLOAD_URL ='../data/upload';
+        var UPLOAD_URL ='http://try.51eduline.com/data/upload';
         var MID		  = '1043';
         var UID		  = '1043';
         var initNums  =  '140';
@@ -21,13 +20,13 @@
         var success = {icon:1,time:1800,btn:false,title:'',closeBtn:0};
         var error = {icon:2,time:1800,btn:false,title:'',closeBtn:0};
     </script>
-    <script type="text/javascript" src="../addons/theme/stv1/_static/js/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="../addons/theme/stv1/_static/js/core.js"></script>
-    <script type="text/javascript" src="../apps/admin/_static/js/module.js"></script>
-    <script src="../addons/theme/stv1/_static/js/common.js"></script>
-    <script src="../addons/theme/stv1/_static/js/module.common.js"></script>
-    <script type="text/javascript" src="../apps/admin/_static/js/admin.js"></script>
-    <script type="text/javascript" src="../addons/theme/stv1/_static/js/ui.layer.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/core.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/apps/admin/_static/js/module.js"></script>
+    <script src="http://try.51eduline.com/addons/theme/stv1/_static/js/common.js"></script>
+    <script src="http://try.51eduline.com/addons/theme/stv1/_static/js/module.common.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/apps/admin/_static/js/admin.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/ui.layer.js"></script>
     <!--非admin应用的后台js脚本统一写在  模板风格对应的app目录下的admin.js中-->
     <style>
         @font-face {font-family: 'iconfontNEW';src: url('http://try.51eduline.com/addons/theme/stv1/_static/icon/iconfontNEW.woff?v={$site.sys_version}');}
@@ -45,13 +44,52 @@
         .tit_tab li a.on{border-bottom:none;color: #FFF;display: inline-block;background: #3b5999;}
         .tit_tab li a{padding: 0px 10px;}
     </style>
+    <div class="form2" id='search_form'>
+        <form name="statis" method="POST" action="http://try.51eduline.com/index.php?app=admin&mod=Home&act=vipUserCount">
+            <div class="form2">
+                <dl class="lineD" id="dl_phone">
+                    <dt>机构选择 : </dt>
+                    <dd>
+                        <select name="mhm_id" class='s-select'>
+                            <option value="0">全部</option>
+                            <option value="1">测试机构1</option><option value="2">测试机构2</option><option value="3">测试机构3</option><option value="4">测试机构4</option><option value="5">测试机构5</option><option value="6">测试机构6</option><option value="7">测试机构7</option><option value="8">测试机构8</option><option value="9">测试机构9</option><option value="10">测试机构10</option><option value="31">牛顿课堂</option><option value="37">金科教育</option>		</select>
+                    </dd>
+                </dl>
+                <dl class="lineD" id="dl_phone">
+                    <dt>快速选择时间 : </dt>
+                    <dd>
+
+                        <div class="tit_tab">
+                            <select name="quick_time">
+                                <option value="today">今天</option><option value="-1%7Eweek">近七天</option><option value="-1%7Emonth">近一个月</option><option value="-3%7Emonth">近三个月</option>            </select>
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>选择时间段 : </dt>
+                    <dd>
+                        <input type="text" style="width:200px;height:12px;line-height:12px" readonly="readonly" onfocus="core.rcalendar(this,'full');" value="" id="start_ctime" class="s-txt" name="start_ctime">
+                        -
+                        <input type="text" style="width:200px;height:12px;line-height:12px" readonly="readonly" onfocus="core.rcalendar(this,'full');" value="" id="end_ctime" class="s-txt" name="end_ctime">
+                        <p>选择时间段后,以此时间为筛选时间</p>
+                    </dd>
+                </dl>
+                <div class="page_btm" >
+                    <input type="submit" class="btn_b" value="开始统计" id='form_submit'/>
+                </div>
+            </div>
+        </form>
+    </div>
+  <!--  <div class="Toolbar_inbox">
+        <a onclick="admin.fold('search_form')" class="btn_a"><span>统计过滤</span></a>
+    </div>-->
     <!-- START LIST -->
     <div id="vipUserCount_chart" style="width: 100%;height:300px;">
     </div>
-    <script  type="text/javascript" src="../addons/theme/stv1/_static/js/echarts/echarts.min.js"></script>
+    <script  type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/echarts/echarts.min.js"></script>
     <script type="text/javascript">
         $(function(){
-            var time = '2019-05-16';
+            var time = '2019-05-17';
             // 折线
             var vipUserCountEcharts = echarts.init(document.getElementById('vipUserCount_chart'));
             Echarts = echarts.init(document.getElementById('vipUserCount_chart'));
@@ -67,7 +105,7 @@
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: JSON.parse('["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00"]')
+                    data: JSON.parse('["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00"]')
                 },
                 yAxis: {
                     type: 'value',
@@ -91,7 +129,7 @@
                     smooth: true,
                     name: '会员开通量',
                     stack: '会员开通量',
-                    data: JSON.parse('["0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"]'),
+                    data: JSON.parse('["0","0","0","0","0","0","0","0","0","0","0","0","0","0"]'),
                 }],
                 tooltip: {
                     trigger: 'axis',
@@ -129,7 +167,7 @@
 
             //数据导出
             $("#export").on('click', function(){
-                window.location.href = "../index.php?app=admin&mod=Home&act=export&tpl=vipUser";
+                window.location.href = "http://try.51eduline.com/index.php?app=admin&mod=Home&act=export&tpl=vipUser";
             });
 
         });
@@ -156,5 +194,6 @@
     $(document).ready(function(){
         admin.bindTrOn();});
 </script>
+
 </body>
 </html>

@@ -46,7 +46,7 @@
     <!-- START TAB框 -->
     <div class="tit_tab">
         <ul>
-            <li><a href="../index.php?app=course&mod=AdminVideo&act=index&tabHash=index" class="on">已审</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=unauditList&tabHash=unauditList" >待审</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=recycle&tabHash=recycle" >回收站</a></li><li><a href="../admin/add_planting.html?app=course&mod=AdminVideo&act=addVideo&tabHash=addVideo" >添加</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=videoLib&tabHash=videoLib" >课件库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=problemQuestionBank&tabHash=problemQuestionBank" >视频弹题题库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=videoLibVerify&tabHash=videoLibVerify" >CC待同步视频库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=export&tabHash=export" >导出</a></li>
+            <li><a href="../admin/bunch_planting.html?app=course&mod=AdminVideo&act=index&tabHash=index" class="on">已审</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=unauditList&tabHash=unauditList" >待审</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=recycle&tabHash=recycle" >回收站</a></li><li><a href="../admin/add_planting.html?app=course&mod=AdminVideo&act=addVideo&tabHash=addVideo" >添加</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=videoLib&tabHash=videoLib" >课件库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=problemQuestionBank&tabHash=problemQuestionBank" >视频弹题题库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=videoLibVerify&tabHash=videoLibVerify" >CC待同步视频库</a></li><li><a href="http://try.51eduline.com/index.php?app=course&mod=AdminVideo&act=export&tabHash=export" >导出</a></li>
             <!-- 已审 -->
         </ul>
     </div>
@@ -75,10 +75,7 @@
             <td>{{item.teachername}}</td>
             <td>{{item.teachername}}</td>
             <td>{{item.addtime}}</td>
-            <td><a>立即上架</a>
-                <a>编辑</a>
-                <a>查看</a>
-                <a>评论</a>
+            <td><a href="javascript:void(0);" class="business" parameter="uid=2" hideFocus="true"  @click="tongById(item.id)">通过</a>
                 <a href="javascript:void(0);" class="business" parameter="uid=2" hideFocus="true"  @click="deletebunchById(item.id)">禁用</a>
             </td>
         </tr>
@@ -124,7 +121,7 @@
     var cardvue;
     $(function() {
         $.ajax({
-            url: 'http://127.0.0.1:8080/bunch/buquerybunch3',
+            url: 'http://192.168.1.115:8080/bunch/buquerybunch3',
             type: 'get',
             success: function (data) {
                 cardvue = new Vue({
@@ -134,9 +131,9 @@
                     },
                     methods:{
                         deletebunchById(id) {
-                            alert("进入删除")
+
                             $.ajax({
-                                url: 'http://127.0.0.1:8080/bunch/deletebunchById',
+                                url: 'http://192.168.1.115:8080/bunch/deletebunchById',
                                 data: {
                                     id: id
                                 },
@@ -149,6 +146,25 @@
                             })
                         }
                     },
+
+                    methods:{
+                        tongById(id) {
+
+                            $.ajax({
+                                url: 'http://192.168.1.115:8080/bunch/tongBybunchById',
+                                data: {
+                                    id: id
+                                },
+                                type: 'post',
+                                success: function () {
+                                    alert("审核通过")
+                                    location = location
+                                }
+
+                            })
+                        }
+                    },
+
 
                 })
             },

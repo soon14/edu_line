@@ -41,7 +41,7 @@
         <!-- START CONFIG_FORM -->
 
 
-        <form method="POST" action="http://127.0.0.1:8080/user/addteacher" >
+        <form method="POST" action="http://192.168.1.115:8080/user/addteacher" >
             <input type="hidden" name='systemdata_list' value="classroom_AdminTeacher"  class="s-txt"/>
             <input type="hidden" name='systemdata_key' value="add"  class="s-txt"/>
             <input type="hidden" name='pageTitle' value="添加" class="s-txt" />
@@ -57,7 +57,7 @@
                             })
                             function querycourseorgid(){
                                 $.ajax({
-                                    url:'http://127.0.0.1:8080/bunch/findCouserorgBean',
+                                    url:'http://192.168.1.115:8080/bunch/findCouserorgBean',
                                     type:'get',
                                     success:function(data){
                                         var html = "<option value='-1'>请选择</option>";
@@ -90,7 +90,7 @@
                             })
                             function querydegreeid(){
                                 $.ajax({
-                                    url:'http://127.0.0.1:8080/bunch/finddegreeid',
+                                    url:'http://192.168.1.115:8080/bunch/finddegreeid',
                                     type:'get',
                                     success:function(data){
                                         var html = "<option value='-1'>请选择</option>";

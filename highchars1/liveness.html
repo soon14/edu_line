@@ -1,123 +1,199 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
-    <title>Insert title here</title>
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script src="../highcharts/code/highcharts.js"></script>
-    <script src="../highcharts/code/modules/series-label.js"></script>
-    <script src="../highcharts/code/modules/exporting.js"></script>
-    <script src="../highcharts/code/modules/export-data.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link href="http://try.51eduline.com/apps/admin/_static/css/admin.css" rel="stylesheet" type="text/css">
+    <script>
+        /**
+         * 全局变量
+         */
+        var SITE_URL  = 'http://try.51eduline.com';
+        var THEME_URL = 'http://try.51eduline.com/addons/theme/stv1/_static';
+        var APPNAME   = 'admin';
+        var UPLOAD_URL ='http://try.51eduline.com/data/upload';
+        var MID		  = '1043';
+        var UID		  = '1043';
+        var initNums  =  '140';
+        // Js语言变量
+        var LANG = new Array();
+        var info = {icon:0,time:1800,btn:false,title:'',closeBtn:0};
+        var success = {icon:1,time:1800,btn:false,title:'',closeBtn:0};
+        var error = {icon:2,time:1800,btn:false,title:'',closeBtn:0};
+    </script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/core.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/apps/admin/_static/js/module.js"></script>
+    <script src="http://try.51eduline.com/addons/theme/stv1/_static/js/common.js"></script>
+    <script src="http://try.51eduline.com/addons/theme/stv1/_static/js/module.common.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/apps/admin/_static/js/admin.js"></script>
+    <script type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/ui.layer.js"></script>
+    <!--非admin应用的后台js脚本统一写在  模板风格对应的app目录下的admin.js中-->
+    <style>
+        @font-face {font-family: 'iconfontNEW';src: url('http://try.51eduline.com/addons/theme/stv1/_static/icon/iconfontNEW.woff?v={$site.sys_version}');}
+        .iconfontNEW{font-family: iconfontNEW;font-style: normal;}
+    </style>
 </head>
 <body>
-<div id="container2" style="width: 1200px;height: 300px"></div>
-</body>
-<script type="text/javascript">
-    /*<![CDATA[*/
-    $(function(){
-        initOne();
-    })
-    var chart;
-    var current_time=1;
-    //在横坐标中有时我们是需要指定坐标上每个坐标点需要显示的文字内容的，这时我们需要使用到一个categories属性，通过将一个数组值传给categories属性，这样在横坐标上的每个坐标点就会     按照指定的属性内容显示坐标点信息。为了实现如上目的，我们需要再设置一个变量，并将这个变量赋予categories属性
-    var x_arr = ['0:00', '1:00', '2:00', '3:00', '4:00', '5:00',
-        '6:00', '7:00', '8:00', '9:00', '10:00', '11:00',
-        '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
-        '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
-    function  initOne(){
-        $.ajax({
-            url:"http://localhost:8080/test1/findTwo",
-            dataType:"json",
-            success:function(data){
-                var chart = Highcharts.chart('container2', {
-                    chart: {
-                        renderTo: 'container',
-                        type: 'line',
-                        marginRight: 130,
-                        marginBottom: 80,
-                        events: {
-                            load:loadTime
+<style type="text/css">
+    .tit_tab { margin: 10px 0; }
+    .tit_tab input{ margin-top: 5px; }
+</style>
+<div id="container" class="so_main">
+    <style type="text/css">
+        .tit_tab{border-bottom: none;}
+        .tit_tab li a.on{border-bottom:none;color: #FFF;display: inline-block;background: #3b5999;}
+        .tit_tab li a{padding: 0px 10px;}
+    </style>
+    <div class="form2" id='search_form'>
+        <form name="statis" method="POST" action="http://try.51eduline.com/index.php?app=admin&mod=Home&act=vipUserCount">
+            <div class="form2">
+                <dl class="lineD" id="dl_phone">
+                    <dt>机构选择 : </dt>
+                    <dd>
+                        <select name="mhm_id" class='s-select'>
+                            <option value="0">全部</option>
+                            <option value="1">测试机构1</option><option value="2">测试机构2</option><option value="3">测试机构3</option><option value="4">测试机构4</option><option value="5">测试机构5</option><option value="6">测试机构6</option><option value="7">测试机构7</option><option value="8">测试机构8</option><option value="9">测试机构9</option><option value="10">测试机构10</option><option value="31">牛顿课堂</option><option value="37">金科教育</option>		</select>
+                    </dd>
+                </dl>
+                <dl class="lineD" id="dl_phone">
+                    <dt>快速选择时间 : </dt>
+                    <dd>
+
+                        <div class="tit_tab">
+                            <select name="quick_time">
+                                <option value="today">今天</option><option value="-1%7Eweek">近七天</option><option value="-1%7Emonth">近一个月</option><option value="-3%7Emonth">近三个月</option>            </select>
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>选择时间段 : </dt>
+                    <dd>
+                        <input type="text" style="width:200px;height:12px;line-height:12px" readonly="readonly" onfocus="core.rcalendar(this,'full');" value="" id="start_ctime" class="s-txt" name="start_ctime">
+                        -
+                        <input type="text" style="width:200px;height:12px;line-height:12px" readonly="readonly" onfocus="core.rcalendar(this,'full');" value="" id="end_ctime" class="s-txt" name="end_ctime">
+                        <p>选择时间段后,以此时间为筛选时间</p>
+                    </dd>
+                </dl>
+                <div class="page_btm" >
+                    <input type="submit" class="btn_b" value="开始统计" id='form_submit'/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--<div class="Toolbar_inbox">
+        <a onclick="admin.fold('search_form')" class="btn_a"><span>统计过滤</span></a>
+    </div>-->
+    <!-- START LIST -->
+    <div id="vipUserCount_chart" style="width: 100%;height:300px;">
+    </div>
+    <script  type="text/javascript" src="http://try.51eduline.com/addons/theme/stv1/_static/js/echarts/echarts.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            var time = '2019-05-17';
+            // 折线
+            var vipUserCountEcharts = echarts.init(document.getElementById('vipUserCount_chart'));
+            Echarts = echarts.init(document.getElementById('vipUserCount_chart'));
+            var school_title = '平台'
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: school_title+' - 用户活跃度统计'
+                },
+                legend: {
+                    show: false
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    data: JSON.parse('["0:00","1:00","2:00","3:00","4:00","5:00","6:00","7:00","8:00","9:00","10:00","11:00","12:00","13:00"]')
+                },
+                yAxis: {
+                    type: 'value',
+                    minInterval: 1,
+                    axisLabel: {
+                        formatter: '{value}人'
+                    }
+                },
+                series: [{
+                    type: 'line',
+                    markPoint: {
+                        symbolSize: 40,
+                        data: [{
+                            type: 'max',
+                            name: '最高开通量'
+                        }, {
+                            type: 'min',
+                            name: '最低开通量'
+                        }]
+                    },
+                    smooth: true,
+                    name: '会员开通量',
+                    stack: '会员开通量',
+                    data: JSON.parse('["0","0","0","0","0","0","0","0","0","0","0","0","0","0"]'),
+                }],
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'line', //shadow
+                        lineStyle: {
+                            width: 2,
+                            type: 'dashed',
+                            color: '#66D7FF'
                         }
-                    },
-                    title: {
-                        text: '访问统计'
-                    },
-                    subtitle: {
-                        text: ''
-                    },
-                    xAxis: {
-                        title: {
-                            enabled: true,
-                            text: '时间（小时）'
+                    }
+                },
+                toolbox: {
+                    feature: {
+                        // dataZoom:{show:true},
+                        mark: {
+                            show: true
                         },
-                        //x_arr 在横坐标中有时我们是需要指定坐标上每个坐标点需要显示的文字内容的，这时我们需要使用到一个categories属性，通过将一个数组值传给categories属性，这样在横坐标上的每个坐标点就会按照指定的属性内容显示坐标点信息。为了实现如上目的，我们需要再设置一个变量，并将这个变量赋予categories属性。
-                        //横坐标上就是按照我们在x_arr变量中设定的内容显示的。如果设定的内容少于横坐标的坐标点，则前面的坐标点将按x_arr变量中设定内容显示，后面的坐标点将按默认的坐标点信息显示。
-                        categories: x_arr,
-                        max: 23,
-                        min: 0,
-                        tickPixelInterval: 50
-                    },
-                    yAxis: {
-                        title: {
-                            text: '次数'
-                        }
-                    },
-                    legend: {
-                        x: -50,
-                        y: 10,
-                        enabled: true
-                    },
-                    exporting: {
-                        enabled: false
-                    },
-                    plotOptions: {
-                        line: {
-                            gapSize: 100
-                        }
-                    },
-                    series: [{
-                        name: '用户活跃度',
-                        data: getFirstData()
-                    }]
-                });
-            }
-        })
-    }
-    function loadTime(){
-        window.setTimeout(getData,TIMEOUT);
-    }
-    function getFirstData() {
-        var data = [];
-        var y_mx = Math.round(Math.random() * 10);
-        var i;
+                        magicType: {
+                            type: ['line', 'bar']
+                        },
+                        restore: {},
+                        saveAsImage: {
+                            name: time + '会员开通量'},
+                    }
+                },
+                grid: {
+                    show: true,
+                    containLabel: false
+                },
+                color:['#5458c9','#1d96e8',  '#d4237a','#2aa515', '#e0620d','#11c0b6',  '#594d9c', '#f4ba2a']
+            };
+            // 使用刚指定的配置项和数据显示图表。
+            vipUserCountEcharts.setOption(option);
 
-        for (i = 0; i <= 0; i++) {
-            data.push({
-                x: current_time,
-                y: y_mx
+            //数据导出
+            $("#export").on('click', function(){
+                window.location.href = "http://try.51eduline.com/index.php?app=admin&mod=Home&act=export&tpl=vipUser";
             });
-            if (current_time <= 23) {
-                current_time++;
+
+        });
+    </script></div>
+<script type="text/javascript">
+    document.onkeydown=function (e) {
+        e=window.event||e;
+        var key = e.keyCode;
+        if ((e.ctrlKey && key == 82) || key == 116) {
+            parent.MainIframe.location.reload();
+            if(document.all) {
+                e.keyCode = 0;
+                e.returnValue = false;
+            }else {
+                e.cancelBubble = true;
+                e.preventDefault();
             }
         }
-        return data;
     }
-    // 这个函数是用来模拟初始化chart对象时，获得的大桥桥面温度值。其返回的是一个数组对象，数组中的每个对象包含x、y属性，这两个属性用来告诉chart对象x轴的某个坐标上面的y值是多少，并在此处显示一个坐标点，同时将连接相邻两个坐标点形成曲线。代码中的current_time是一个全局变量，用来对当前采集显示次数进行计数。
-    function getData() {
-        var current_x = x_arr[current_time];
-
-        //获取最大值
-        var series_mx = chart.series[0];
-        var y_mx = Math.round(Math.random() * 10);
-
-        series_mx.addPoint([current_time, y_mx], true, false);
-
-        current_time++;
-
-        if (current_time <= 23) {
-            window.setTimeout(getData, 1000);
-        }
-    }
-    /*]]>*/
+    /**
+     * 初始化对象
+     */
+//表格样式
+    $(document).ready(function(){
+        admin.bindTrOn();});
 </script>
+
+</body>
 </html>
